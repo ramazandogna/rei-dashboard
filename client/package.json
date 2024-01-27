@@ -12,9 +12,12 @@
     "vue": "^3.3.11"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.175",
+    "@unocss/preset-icons": "^0.58.4",
     "@unocss/preset-uno": "^0.58.4",
     "@unocss/preset-web-fonts": "^0.58.4",
     "@vitejs/plugin-vue": "^4.5.2",
+    "Icônes": "link:@iconify-json/Icônes",
     "typescript": "^5.2.2",
     "unocss": "^0.58.4",
     "vite": "^5.0.8",
