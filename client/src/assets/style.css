@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    
-    background-color: #f7f7f7;
-    font-size: 14px;
+* {
+}
+body {
+  font-size: 14px;
+  background: #f9fafb;
 }

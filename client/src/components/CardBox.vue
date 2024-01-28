@@ -1,5 +1,15 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import BaseIcon from './BaseIcon.vue'
+export default defineComponent({
+  setup() {
+    return {}
+  },
+  components: { BaseIcon }
+})
+</script>
 <template>
-  <div class="fle box-border w-full rounded-2xl p-6 shadow">
+  <div class="box-border w-full rounded-2xl bg-white p-6 shadow transition-all hover:shadow-xl">
     <div class="mb-12px">
       <div class="w-70px text-12px h-26px bg-green flex items-center justify-center rounded-2xl text-white">
         button
@@ -19,16 +29,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import BaseIcon from './BaseIcon.vue'
-export default defineComponent({
-  setup() {
-    return {}
-  },
-  components: { BaseIcon }
-})
-</script>
-
-<style scoped></style>

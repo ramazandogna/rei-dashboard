@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="gap-24px mb-6 flex items-center">
+  <section class="gap-12px mb-6 flex items-center [line-height:1.5rem]">
     <div class="flex h-12 w-12 items-center justify-center rounded-full shadow">
       <div class="w-24px h-24px" :class="icon"></div>
     </div>

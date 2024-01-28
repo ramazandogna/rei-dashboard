@@ -1,5 +1,5 @@
 <template>
-  <section class="maxW p-6">
+  <section class="bg-#f9fafb maxW relative p-6">
     <slot />
   </section>
 </template>
