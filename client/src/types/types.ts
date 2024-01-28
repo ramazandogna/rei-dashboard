@@ -1,3 +1,3 @@
 export type StyleState = {
-    isDark: boolean;
+  isDark: boolean
 }

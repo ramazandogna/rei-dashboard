@@ -11,7 +11,7 @@ export default defineConfig({
    },
    shortcuts: [
       {
-         //shortcuts
+        maxW: "xl:max-w-6xl xl:mx-auto"
       },
    ],
    presets: [
