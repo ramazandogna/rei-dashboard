@@ -35,7 +35,7 @@ export const navbarItems = [
     title: 'Anasayfa',
     to: '/',
     hasDropDown: false,
-    color: 'bg-red text-white'
+    color: ''
   },
   {
     title: 'User - Menu',
@@ -55,7 +55,7 @@ export const navbarItems = [
     title: 'Profile',
     to: '/profile',
     hasDropDown: false,
-    color: 'bg-blue text-white'
+    color: ''
   },
   {
     title: 'Logout',

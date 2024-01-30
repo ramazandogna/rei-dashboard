@@ -15,14 +15,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav class="lg:ml-24px z-99 maxW bg-#f9fafb fixed inset-0 flex h-14 items-center text-black lg:pl-60">
+  <nav
+    class="lg:ml-24px z-99 maxW bg-#f9fafb text-black! pl-1.5rem pr-1.5rem fixed inset-0 flex h-14 items-center lg:pl-60"
+  >
     <div
-      class="flex h-12 w-12 cursor-pointer items-center justify-center lg:mx-auto lg:hidden lg:items-stretch"
+      class="hover:scale-101 flex h-12 w-12 cursor-pointer items-center justify-center shadow-sm transition-all hover:rotate-3 lg:hidden lg:items-stretch"
     >
-      <div class="w-24px h-24px i-mdi-hamburger"></div>
+      <div class="w-32px h-32px i-mdi-hamburger"></div>
     </div>
     <div class="flex w-full items-center justify-between">
-      <h1 class="text-20px">Reî Dashboard</h1>
+      <h1 class="text-20px lg:pl-1.5rem pl-1">Reî Dashboard</h1>
       <ul class="gap-12px decoration-none mr-1 flex items-center">
         <NavbarItem
           v-for="(navItem, index) in navbarItems"

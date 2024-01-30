@@ -73,9 +73,4 @@ export default defineComponent({
   </li>
 </template>
 
-<style>
-a {
-  text-decoration: none;
-  color: currentColor;
-}
-</style>
+<style></style>

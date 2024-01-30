@@ -34,7 +34,11 @@ export default defineComponent({
 <style scoped></style>
 
 <template>
-  <li v-if="hasDropDown" @click="toggleShow" class="relative cursor-pointer px-3 py-2 active:bg-blue-100">
+  <li
+    v-if="hasDropDown"
+    @click="toggleShow"
+    class="relative cursor-pointer rounded-2xl px-3 py-2 active:bg-blue-100"
+  >
     <div class="flex items-center">
       <span>{{ title }}</span>
       <span

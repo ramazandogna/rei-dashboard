@@ -31,7 +31,7 @@ export default defineComponent({
   <div :class="{ dark: isDark }" class="font-[Open_Sans]">
     <Navbar />
     <SideMenu mr- />
-    <div class="lg:ml-24px mt-14 lg:pl-60">
+    <div class="min-h-100vh lg:ml-24px mt-14 lg:pl-60">
       <slot></slot>
     </div>
   </div>

@@ -1,58 +1,3 @@
-<template>
-  <LayoutAuthentication>
-    <SectionMain>
-      <SectionTitle title="Overview" icon="i-ic-baseline-table-chart"> </SectionTitle>
-      <div class="mb-6 flex gap-6"><CardBox></CardBox><CardBox></CardBox><CardBox></CardBox></div>
-      <div class="mb-6 flex gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim
-        ><CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-      </div>
-      <div class="mb-6 flex gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim
-        ><CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-      </div>
-      <div class="mb-6 flex gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim
-        ><CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-      </div>
-      <div class="mb-6 flex gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim
-        ><CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-      </div>
-    </SectionMain>
-    <SectionMain>
-      <div
-        class="mb-6 mt-6 cursor-crosshair rounded-2xl bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 px-6 py-12 text-center shadow transition-all hover:shadow-2xl lg:px-12"
-      >
-        <h1 class="mb-6 text-3xl text-white">
-          Like the project? Please star on <span class="font-bold">GitHub</span> ;)
-        </h1>
-        <a
-          class="inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-white bg-white px-6 py-2 text-black ring-gray-200 transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus:ring dark:ring-gray-500"
-          href="https://github.com/ramazanogna"
-          target="_blank"
-          disabled="false"
-          ><span class="inline-flex h-6 w-6 items-center justify-center"
-            ><svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-              <path
-                fill="currentColor"
-                d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
-              ></path></svg></span
-          ><span class="px-2">GitHub</span></a
-        >
-      </div>
-    </SectionMain>
-    <SectionMain>
-      <SectionTitle title="Trends overview (Charts)" icon="i-material-symbols-add-chart"> </SectionTitle>
-    </SectionMain>
-    <SectionMain>
-      <SectionTitle title="Users" icon="i-material-symbols-person-pin-rounded"> </SectionTitle>
-    </SectionMain>
-
-    <SectionTitle2>Test Section Title </SectionTitle2>
-  </LayoutAuthentication>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import LayoutAuthentication from '../layouts/LayoutAuthentication.vue'
@@ -61,13 +6,69 @@ import SectionTitle from '../components/SectionTitle.vue'
 import SectionTitle2 from '../components/SectionTitle2.vue'
 import CardBox from '../components/CardBox.vue'
 import CardBoxSlim from '../components/CardBoxSlim.vue'
+import Charts from '../components/charts/Chart.vue'
+import Users from '../components/tables/UserTable.vue'
+import Introduce from '../components/Introduce.vue'
 
 export default defineComponent({
   setup() {
     return {}
   },
-  components: { LayoutAuthentication, SectionMain, SectionTitle, SectionTitle2, CardBox, CardBoxSlim }
+  components: {
+    LayoutAuthentication,
+    SectionMain,
+    SectionTitle,
+    SectionTitle2,
+    CardBox,
+    CardBoxSlim,
+    Charts,
+    Users,
+    Introduce
+  }
 })
 </script>
 
-<style scoped></style>
+<template>
+  <LayoutAuthentication>
+    <!-- Overview Section -->
+    <SectionMain>
+      <SectionTitle title="Overview" icon="i-ic-baseline-table-chart"> </SectionTitle>
+      <div class="mb-6 flex gap-6">
+        <CardBox></CardBox>
+        <CardBox></CardBox>
+        <CardBox></CardBox>
+      </div>
+      <div class="mb-6 flex flex-wrap gap-6">
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+      </div>
+      <div class="mb-6 flex flex-wrap gap-6">
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+      </div>
+      <div class="mb-6 flex flex-wrap gap-6">
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+      </div>
+      <div class="mb-6 flex flex-wrap gap-6">
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+      </div>
+    </SectionMain>
+    <!-- Introduce Section -->
+    <SectionMain>
+      <Introduce />
+    </SectionMain>
+    <!-- Charts Section -->
+    <SectionMain class="h-550px max-h-500px">
+      <SectionTitle class="" title="Trends overview (Charts)" icon="i-material-symbols-add-chart">
+      </SectionTitle>
+      <Charts class="" height="max-h-450px w-auto" />
+    </SectionMain>
+    <!-- Kullanıcı Tablosu Section -->
+    <SectionMain class="mt-48px">
+      <SectionTitle title="Users" icon="i-material-symbols-person-pin-rounded"> </SectionTitle>
+      <Users />
+    </SectionMain>
+  </LayoutAuthentication>
+</template>
