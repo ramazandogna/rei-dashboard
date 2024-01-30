@@ -22,7 +22,7 @@
     </SectionMain>
     <SectionMain>
       <div
-        class="mb-6 mt-6 rounded-2xl bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 px-6 py-12 text-center lg:px-12"
+        class="mb-6 mt-6 cursor-crosshair rounded-2xl bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 px-6 py-12 text-center shadow transition-all hover:shadow-2xl lg:px-12"
       >
         <h1 class="mb-6 text-3xl text-white">
           Like the project? Please star on <span class="font-bold">GitHub</span> ;)
@@ -42,8 +42,12 @@
         >
       </div>
     </SectionMain>
-    <SectionTitle title="Trends overview (Charts)" icon="i-material-symbols-add-chart"> </SectionTitle>
-    <SectionTitle title="Users" icon="i-material-symbols-person-pin-rounded"> </SectionTitle>
+    <SectionMain>
+      <SectionTitle title="Trends overview (Charts)" icon="i-material-symbols-add-chart"> </SectionTitle>
+    </SectionMain>
+    <SectionMain>
+      <SectionTitle title="Users" icon="i-material-symbols-person-pin-rounded"> </SectionTitle>
+    </SectionMain>
 
     <SectionTitle2>Test Section Title </SectionTitle2>
   </LayoutAuthentication>

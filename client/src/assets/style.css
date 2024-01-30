@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-}
 body {
   font-size: 14px;
   background: #f9fafb;
+  color: black;
+}
+
+a {
+  text-decoration: none !important;
+  color: currentColor !important;
 }

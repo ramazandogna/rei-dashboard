@@ -11,7 +11,9 @@ export default defineComponent({
 <template>
   <div class="box-border w-full rounded-2xl bg-white p-6 shadow transition-all hover:shadow-xl">
     <div class="mb-12px">
-      <div class="w-70px text-12px h-26px bg-green flex items-center justify-center rounded-2xl text-white">
+      <div
+        class="w-70px text-12px h-26px bg-green flex cursor-pointer items-center justify-center rounded-2xl text-white transition-all hover:bg-green-600 hover:shadow"
+      >
         button
       </div>
     </div>
@@ -23,7 +25,7 @@ export default defineComponent({
       <div class="w-48px h-48px flex items-center justify-center">
         <BaseIcon
           path="your-icon-path"
-          class="text-green i-material-symbols:deployed-code-account-rounded h-full w-full"
+          class="text-green i-material-symbols:deployed-code-account-rounded hover:rotate-9 h-full w-full transition-all"
         />
       </div>
     </div>

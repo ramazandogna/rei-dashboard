@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, watch } from 'vue'
-import NavBar from '../components/NavBar.vue'
+import Navbar from '../components/Navbar.vue'
 import SideMenu from '../components/SideMenu.vue'
 
 export default defineComponent({
@@ -20,16 +20,16 @@ export default defineComponent({
     watch(isDark, () => {
       writeLocalStorage()
     })
-    console.log(isDark.value)
+    console.log('dark mode:', isDark.value)
     return { isDark }
   },
-  components: { NavBar, SideMenu }
+  components: { Navbar, SideMenu }
 })
 </script>
 
 <template>
   <div :class="{ dark: isDark }" class="font-[Open_Sans]">
-    <NavBar />
+    <Navbar />
     <SideMenu mr- />
     <div class="lg:ml-24px mt-14 lg:pl-60">
       <slot></slot>

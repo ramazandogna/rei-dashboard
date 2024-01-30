@@ -30,7 +30,7 @@ export default defineComponent({
       <div class="gap-8px ml-auto flex flex-col">
         <div class="text-#6b7280 text-14px">Home Loan Account</div>
         <div
-          class="w-70px text-12px h-26px bg-green ml-auto flex items-center justify-center rounded-2xl text-white"
+          class="w-70px text-12px h-26px bg-green ml-auto flex cursor-pointer items-center justify-center rounded-2xl text-white transition-all hover:bg-green-600 hover:shadow"
         >
           button
         </div>
