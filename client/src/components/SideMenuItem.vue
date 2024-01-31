@@ -4,9 +4,7 @@ import { RouterLink } from 'vue-router'
 
 interface SubItem {
   title?: string
-  iconClass: string
   to: string
-  hasSubMenu?: boolean
   subItems?: SubItem[]
 }
 
@@ -14,7 +12,7 @@ export default defineComponent({
   props: {
     title: String,
     subItems: Array as () => SubItem[], // SubItem tipindeki diziyi bekleyen bir prop tanımlaması
-    iconClass: String,
+    icon: String,
     to: String,
     hasSubMenu: Boolean
   },
@@ -45,7 +43,8 @@ export default defineComponent({
     >
       <div class="flex h-6 w-16 w-full items-center">
         <div class="w-64px flex items-center justify-center">
-          <div :class="iconClass"></div>
+          <div v-if="icon" class="w-20px h-20px" :class="icon || 'i-material-symbols-account-balance'"></div>
+          {{ console.log(icon) }}
         </div>
         <div class="px-12px line-clamp-1 flex grow items-center text-ellipsis">{{ title }}</div>
         <div v-if="hasSubMenu" class="w-48px flex items-center justify-center">

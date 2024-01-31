@@ -1,12 +1,36 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import SideMenuItem from './SideMenuItem.vue'
 import { sideMenuItems } from '../data/index'
+
 export default defineComponent({
-  setup() {
+  props: {
+    isSideMenuOpen: {
+      type: Boolean,
+      default: true
+    },
+    toggleSideMenu: {
+      type: Function as () => void, // Tipi () => void olarak belirtiliyor.
+      default: () => {}
+    }
+  },
+  setup(props) {
+    const show = ref<boolean>(false)
+    console.log('side menu show', props.isSideMenuOpen)
+
+    watch(
+      () => props.isSideMenuOpen,
+      () => {
+        show.value = props.isSideMenuOpen
+        console.log('side menu show:', show.value)
+      }
+    )
+
     return {
-      sideMenuItems
+      sideMenuItems,
+      isSideMenuOpen: props.isSideMenuOpen,
+      show
     }
   },
   components: { RouterLink, SideMenuItem }
@@ -15,18 +39,26 @@ export default defineComponent({
 
 <template>
   <aside
-    class="z-100 animate-fade-in-left animate-duration-200 bg-#141c2e fixed inset-0 left-0 top-0 mb-2 ml-2 mt-2 hidden w-60 overflow-hidden rounded-2xl text-white lg:flex"
+    :class="!show ? 'hidden lg:flex' : 'flex lg:flex'"
+    class="z-100 animate-fade-in-left animate-duration-200 bg-#141c2e fixed inset-0 left-0 top-0 mb-2 ml-2 mt-2 w-60 overflow-hidden rounded-2xl text-white"
   >
     <div class="relative h-full w-full flex-col justify-center rounded-2xl">
       <div class="flex h-full flex-col">
-        <div class="flex h-14 items-center justify-center rounded-t-2xl font-bold">Hey, Name <br /></div>
+        <div class="relative flex h-14 items-center justify-center rounded-t-2xl font-bold">
+          <div>Hey, Name <br /></div>
+          <div
+            @click="toggleSideMenu"
+            v-show="show"
+            class="i-material-symbols:close-small-outline-rounded h-30px text-35px w-30px -translate-y-50% absolute right-3 top-1/2 block cursor-pointer lg:hidden"
+          ></div>
+        </div>
         <div class="bg-#1f2937 flex flex-grow overflow-y-auto">
           <ul class="flex w-full flex-col">
             <SideMenuItem
               v-for="(menuItem, index) in sideMenuItems"
               :key="index"
               :title="menuItem.title"
-              :iconClass="menuItem.iconClass"
+              :icon="menuItem.icon"
               :to="menuItem.to"
               :hasSubMenu="menuItem.hasSubMenu"
               :subItems="menuItem.subItems"

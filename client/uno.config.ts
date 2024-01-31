@@ -18,7 +18,9 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetIcons({
-      /* options */
+      collections: {
+        mdi: () => import('@iconify-json/mdi/icons.json').then(i => i.default)
+      }
     }),
     presetWebFonts({
       provider: 'google', // default provider

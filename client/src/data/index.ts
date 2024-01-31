@@ -1,42 +1,64 @@
 export const sideMenuItems = [
   {
-    title: 'Profile',
-    iconClass: 'i-material-symbols-account-balance',
+    title: 'Dashboard',
+    icon: 'i-material-symbols-display-settings-rounded',
     to: '/profile',
     hasSubMenu: false
   },
   {
-    title: 'Styles',
-    iconClass: 'i-material-symbols-account-balance',
+    title: 'Dropmenu',
+    icon: 'i-material-symbols-event-list',
     hasSubMenu: true,
     subItems: [
       {
         title: 'Sub1',
-        iconClass: 'i-material-symbols-account-balance',
         to: '/sub1'
       },
       {
         title: 'Sub2',
-        iconClass: 'i-material-symbols-account-balance',
         to: '/sub2'
       }
     ]
   },
   {
-    title: 'Profile2',
-    iconClass: 'i-material-symbols-account-balance',
-    to: '/profile',
+    title: 'Users',
+    icon: 'i-material-symbols-person-pin-rounded',
+    to: '/user',
+    hasSubMenu: false
+  },
+  {
+    title: 'UI',
+    icon: 'i-material-symbols-view-quilt-sharp',
+    to: '/ui',
+    hasSubMenu: false
+  },
+  {
+    title: 'Erros',
+    icon: 'i-material-symbols-partner-reports',
+    to: '/errors',
+    hasSubMenu: false
+  },
+  {
+    title: 'Modals',
+    icon: 'i-material-symbols-deployed-code-update-outline-sharp',
+    to: '/modals',
+    hasSubMenu: false
+  },
+  {
+    title: 'Forms',
+    icon: 'i-material-symbols-dynamic-form',
+    to: '/forms',
+    hasSubMenu: false
+  },
+  {
+    title: 'Tables',
+    icon: 'i-material-symbols-table-bar-rounded',
+    to: '/tables',
     hasSubMenu: false
   }
 ]
 
 export const navbarItems = [
-  {
-    title: 'Anasayfa',
-    to: '/',
-    hasDropDown: false,
-    color: ''
-  },
   {
     title: 'User - Menu',
     hasDropDown: true,
@@ -52,8 +74,14 @@ export const navbarItems = [
     ]
   },
   {
-    title: 'Profile',
-    to: '/profile',
+    title: 'Language',
+    to: '',
+    hasDropDown: false,
+    color: ''
+  },
+  {
+    title: 'Dark',
+    to: '',
     hasDropDown: false,
     color: ''
   },
