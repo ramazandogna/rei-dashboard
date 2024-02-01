@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-//sidemenu
 export default function useSideMenuShow() {
   const isSideMenuOpen = ref(false)
   const toggleSideMenu = () => {

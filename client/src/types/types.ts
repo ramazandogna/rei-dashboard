@@ -13,6 +13,7 @@ export interface User {
   phone: string
   website: string
   company: Company
+  selected?: boolean
 }
 
 export interface Address {

@@ -1,13 +1,13 @@
 export const sideMenuItems = [
   {
     title: 'Dashboard',
-    icon: 'i-material-symbols-display-settings-rounded',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/profile',
     hasSubMenu: false
   },
   {
     title: 'Dropmenu',
-    icon: 'i-material-symbols-event-list',
+    icon: 'i-material-symbols-person-pin-rounded',
     hasSubMenu: true,
     subItems: [
       {
@@ -28,31 +28,31 @@ export const sideMenuItems = [
   },
   {
     title: 'UI',
-    icon: 'i-material-symbols-view-quilt-sharp',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/ui',
     hasSubMenu: false
   },
   {
-    title: 'Erros',
-    icon: 'i-material-symbols-partner-reports',
+    title: 'Errors',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/errors',
     hasSubMenu: false
   },
   {
     title: 'Modals',
-    icon: 'i-material-symbols-deployed-code-update-outline-sharp',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/modals',
     hasSubMenu: false
   },
   {
     title: 'Forms',
-    icon: 'i-material-symbols-dynamic-form',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/forms',
     hasSubMenu: false
   },
   {
     title: 'Tables',
-    icon: 'i-material-symbols-table-bar-rounded',
+    icon: 'i-material-symbols-person-pin-rounded',
     to: '/tables',
     hasSubMenu: false
   }

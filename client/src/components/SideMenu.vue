@@ -17,13 +17,11 @@ export default defineComponent({
   },
   setup(props) {
     const show = ref<boolean>(false)
-    console.log('side menu show', props.isSideMenuOpen)
 
     watch(
       () => props.isSideMenuOpen,
       () => {
         show.value = props.isSideMenuOpen
-        console.log('side menu show:', show.value)
       }
     )
 
