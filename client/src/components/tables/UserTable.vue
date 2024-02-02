@@ -12,6 +12,7 @@ export default defineComponent({
     const currentPage = ref<number>(1)
     const usersPerPage = 5
 
+    //mock datayı getir
     const fetchUsers = async () => {
       try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/users')
@@ -21,6 +22,13 @@ export default defineComponent({
       }
     }
 
+    //ekranda gösterilecek kullanıcıları tespit et
+    const displayedUsers = computed(() => {
+      const startIdx = (currentPage.value - 1) * usersPerPage
+      return users.value.slice(startIdx, startIdx + usersPerPage)
+    })
+
+    //secili sütunun sıralama şeklini belirle
     const handleSort = (column: string) => {
       if (sortColumn.value === column) {
         sortDirection.value *= -1
@@ -32,6 +40,7 @@ export default defineComponent({
       sortUsers()
     }
 
+    //sıralanacak sütunu belirle
     const sortUsers = () => {
       if (sortColumn.value) {
         users.value.sort((a, b) => {
@@ -50,42 +59,23 @@ export default defineComponent({
       }
     }
 
-    const displayedUsers = computed(() => {
-      const startIdx = (currentPage.value - 1) * usersPerPage
-      return users.value.slice(startIdx, startIdx + usersPerPage)
-    })
-
+    //toplam sayfa sayısını hesapla
     const totalPages = computed(() => Math.ceil(users.value.length / usersPerPage))
 
+    //sayfayı değiştir
     const changePage = (page: number) => {
       if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page
       }
     }
 
-    const deleteUser = (userId: number) => {
-      // Implement your logic to delete the user with the given userId
-      console.log(`Deleting user with ID: ${userId}`)
-    }
-
-    const editUser = (userId: number) => {
-      // Implement your logic to edit the user with the given userId
-      console.log(`Editing user with ID: ${userId}`)
-    }
-
     const selectAllUsers = () => {
-      // Seçim durumunu tersine çevir
       selectAll.value = !selectAll.value
-
-      // Şu anki sayfadaki her kullanıcının 'selected' özelliğini güncelle
+      // görünen tüm kullanıcıları seç
       displayedUsers.value.forEach(user => (user.selected = selectAll.value))
-
-      // Tüm kullanıcı dizisindeki her bir kullanıcının 'selected' özelliğini güncelle
+      // görünen tüm kullanıcıların seçim değerini selectAll.value değerine eşle
       displayedUsers.value.forEach(displayedUser => {
-        // Kullanıcının tüm dizideki indeksini bul
         const userIndex = users.value.findIndex(user => user.id === displayedUser.id)
-
-        // Eğer indeks bulunursa, eşleşen kullanıcının 'selected' özelliğini güncelle
         if (userIndex !== -1) {
           users.value[userIndex].selected = selectAll.value
         }
@@ -97,6 +87,19 @@ export default defineComponent({
       console.log('users.selected', users.value)
     }
 
+    //mock data kullanıcı silme ileride api ile değiştirilecek
+    const deleteUser = (userId: number) => {
+      // Implement your logic to delete the user with the given userId
+      console.log(`Deleting user with ID: ${userId}`)
+    }
+
+    //mock data kullanıcı değiştirme ileride api ile değiştirilecek
+    const editUser = (userId: number) => {
+      // Implement your logic to edit the user with the given userId
+      console.log(`Editing user with ID: ${userId}`)
+    }
+
+    //mock data seçili kullanıcıları silme ileride api ile değiştirilecek
     const deleteSelectedUsers = () => {
       // Filter out the selected users
       const selectedUsers = users.value.filter(user => user.selected)
@@ -109,7 +112,7 @@ export default defineComponent({
       return { selectedUsers }
     }
 
-    // Watch for changes in the users array and log selected users
+    //seçili kullanıcıları izle
     watchEffect(() => {
       const selectedUsers = users.value.filter(user => user.selected)
       console.log('selectedUsers', selectedUsers)
@@ -121,18 +124,17 @@ export default defineComponent({
 
     return {
       displayedUsers,
-      handleSort,
       sortColumn,
       sortDirection,
       totalPages,
       currentPage,
+      selectAll,
+      handleSort,
       changePage,
       deleteUser,
       editUser,
-      selectAll,
       selectAllUsers,
-      deleteSelectedUsers,
-      users
+      deleteSelectedUsers
     }
   }
 })
