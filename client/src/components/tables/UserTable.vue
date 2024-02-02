@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed, watchEffect } from 'vue'
+import { defineComponent, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import type { User } from '../../types/types'
 
@@ -80,11 +80,6 @@ export default defineComponent({
           users.value[userIndex].selected = selectAll.value
         }
       })
-
-      // Seçme durumunu konsola yazdır
-
-      // Kullanıcı dizisinin 'selected' özelliğini konsola yazdır
-      console.log('users.selected', users.value)
     }
 
     //mock data kullanıcı silme ileride api ile değiştirilecek
@@ -112,12 +107,6 @@ export default defineComponent({
       return { selectedUsers }
     }
 
-    //seçili kullanıcıları izle
-    watchEffect(() => {
-      const selectedUsers = users.value.filter(user => user.selected)
-      console.log('selectedUsers', selectedUsers)
-    })
-
     onMounted(() => {
       fetchUsers()
     })
@@ -129,6 +118,7 @@ export default defineComponent({
       totalPages,
       currentPage,
       selectAll,
+      users,
       handleSort,
       changePage,
       deleteUser,
@@ -143,6 +133,11 @@ export default defineComponent({
 <template>
   <div>
     <div class="overflow-x-auto scroll-smooth">
+      <div class="h-54px mb-16px flex w-full flex-wrap items-center bg-white">
+        <div class="gap-4px text-12.5px flex cursor-not-allowed" :key="user.id" v-for="user in users">
+          <span class="p-4px mr-4px rounded-full bg-blue-100" v-if="user.selected">{{ user.name }}</span>
+        </div>
+      </div>
       <table class="mt-4px min-h-450px min-w-full border-collapse border border-gray-300">
         <thead class="bg-blue-100">
           <tr class="min-h-50px">
