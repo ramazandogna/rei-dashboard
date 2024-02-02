@@ -2,6 +2,7 @@
 import { defineComponent, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import type { User } from '../../types/types'
+import SectionMain from '../SectionMain.vue'
 
 export default defineComponent({
   setup() {
@@ -12,7 +13,6 @@ export default defineComponent({
     const sortDirection = ref<number>(1) // 1: Ascending, -1: Descending
     const currentPage = ref<number>(1) //mevcur sayfa
     const usersPerPage = 5 //her sayfada gösterilecek kullanıcı sayısı
-
     //mock datayı getir
     const fetchUsers = async () => {
       try {
@@ -22,13 +22,19 @@ export default defineComponent({
         console.log(error)
       }
     }
-
+    //arama yap
+    // const searchTerm = ref<string>('');//arama yapılacak kelime
+    // const filteredUsers = computed(() => {
+    //   const term = searchTerm.value.toLowerCase();
+    //   return users.value.filter(user =>
+    //     user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
+    //   );
+    // });
     //ekranda gösterilecek kullanıcıları tespit et
     const displayedUsers = computed(() => {
       const startIdx = (currentPage.value - 1) * usersPerPage
       return users.value.slice(startIdx, startIdx + usersPerPage)
     })
-
     //secili sütunun sıralama şeklini belirle
     const handleSort = (column: string) => {
       if (sortColumn.value === column) {
@@ -37,10 +43,8 @@ export default defineComponent({
         sortColumn.value = column
         sortDirection.value = 1 // Ascending
       }
-
       sortUsers()
     }
-
     //sıralanacak sütunu belirle
     const sortUsers = () => {
       if (sortColumn.value) {
@@ -48,7 +52,6 @@ export default defineComponent({
           const column = sortColumn.value as keyof User
           const aValue = a[column]
           const bValue = b[column]
-
           if (typeof aValue === 'string' && typeof bValue === 'string') {
             return sortDirection.value * aValue.localeCompare(bValue)
           } else if (typeof aValue === 'number' && typeof bValue === 'number') {
@@ -59,44 +62,34 @@ export default defineComponent({
         })
       }
     }
-
     //toplam sayfa sayısını hesapla
     const totalPages = computed(() => Math.ceil(users.value.length / usersPerPage))
-
     //sayfayı değiştir ve değiştirirken hepsi seçili mi kontrol et
     const changePage = (page: number) => {
       if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page
-
         //sayfa değişince mevcut sayfadaki kullanıcılarda gez ve hepsi seçili mi verilerini kontrol et
         selectAll.value = displayedUsers.value.every(user => user.selected)
         updateSelectedAll()
       }
     }
-
     //kullanıcıyı seç
     const selectUser = (user: User) => {
       user.selected = !user.selected
       updateSelectedAll()
     }
-
     //ekranda kullanıcı varsa ve hepsinin değeri true ise isSelectedAll değerini true yap
     const updateSelectedAll = () => {
       isSelectedAll.value =
         displayedUsers.value.length > 0 && displayedUsers.value.every(user => user.selected)
     }
-
     //seçili olmayan tüm kullanıcıları seç, hepsi seçiliyse hepsini bırak
     const selectAllUsers = () => {
       selectAll.value = isSelectedAll.value ? false : (selectAll.value = true)
-
       // görünen tüm kullanıcıları seç
-
       displayedUsers.value.forEach(user => (user.selected = selectAll.value))
-
       // görünen tüm kullanıcıların seçim değerini selectAll.value değerine eşle
       updateSelectedAll()
-
       displayedUsers.value.forEach(displayedUser => {
         const userIndex = users.value.findIndex(user => user.id === displayedUser.id)
         if (userIndex !== -1) {
@@ -104,36 +97,29 @@ export default defineComponent({
         }
       })
     }
-
     //mock data kullanıcı silme ileride api ile değiştirilecek
     const deleteUser = (userId: number) => {
       // Implement your logic to delete the user with the given userId
       console.log(`Deleting user with ID: ${userId}`)
     }
-
     //mock data kullanıcı değiştirme ileride api ile değiştirilecek
     const editUser = (userId: number) => {
       // Implement your logic to edit the user with the given userId
       console.log(`Editing user with ID: ${userId}`)
     }
-
     //mock data seçili kullanıcıları silme ileride api ile değiştirilecek
     const deleteSelectedUsers = () => {
       // Filter out the selected users
       const selectedUsers = users.value.filter(user => user.selected)
-
       // Implement your logic to delete the selected users
       // ...
-
       // Clear the selection after deletion
       selectAll.value = false
       return { selectedUsers }
     }
-
     onMounted(() => {
       fetchUsers()
     })
-
     return {
       displayedUsers,
       sortColumn,
@@ -151,19 +137,19 @@ export default defineComponent({
       deleteSelectedUsers,
       selectUser
     }
-  }
+  },
+  components: { SectionMain }
 })
 </script>
 
 <template>
-  {{ console.log(isSelectedAll) }}
-  <div>
-    <div class="overflow-x-auto scroll-smooth">
-      <div class="h-54px mb-16px flex w-full flex-wrap items-center bg-white">
-        <div class="gap-4px text-12.5px flex cursor-not-allowed" :key="user.id" v-for="user in users">
-          <span class="p-4px mr-4px rounded-full bg-blue-100" v-if="user.selected">{{ user.name }}</span>
-        </div>
+  <div v-if="users.length > 0">
+    <div class="h-54px mb-16px flex w-full flex-wrap items-center bg-white">
+      <div class="gap-4px text-12.5px flex cursor-not-allowed" :key="user.id" v-for="user in users">
+        <span class="p-4px mr-4px rounded-full bg-blue-100" v-if="user.selected">{{ user.name }}</span>
       </div>
+    </div>
+    <div class="overflow-x-auto scroll-smooth">
       <table class="mt-4px min-h-450px min-w-full border-collapse border border-gray-300">
         <thead class="bg-blue-100">
           <tr class="min-h-50px">
@@ -172,7 +158,18 @@ export default defineComponent({
               class="text-16px min-w-56px gap-4px cursor-ns-resize cursor-pointer items-center justify-center p-2 font-bold"
             >
               <div class="gap-4px flex h-full w-full items-center justify-center">
-                <input type="checkbox" v-model="selectAll" :checked="isSelectedAll" />
+                <label
+                  :class="isSelectedAll ? 'bg-blue-300' : 'border bg-white'"
+                  class="w-20px h-20px rounded-4px relative flex cursor-pointer items-center justify-center transition-all"
+                  for="selectAll"
+                >
+                  <span
+                    :class="isSelectedAll ? 'flex' : 'hidden'"
+                    class="-translate-x-50% -translate-y-50% absolute left-1/2 top-1/2 cursor-pointer"
+                    >✔</span
+                  >
+                  <input class="z-3 cursor-pointer opacity-0" type="checkbox" :checked="isSelectedAll" />
+                </label>
                 <div
                   v-show="sortColumn === 'id'"
                   :class="{
@@ -283,20 +280,35 @@ export default defineComponent({
         </thead>
         <tbody>
           <tr class="animate-fade-in" v-for="user in displayedUsers" :key="user.id">
-            <td class="bg-white p-2">
+            <td class="h-45px w-100px bg-white p-2">
               <div class="flex h-full w-full items-center justify-center">
-                <input type="checkbox" :checked="user.selected" @change="selectUser(user)" />
+                <label
+                  :class="user.selected ? 'bg-blue-300' : 'border bg-white'"
+                  class="w-20px h-20px rounded-4px relative flex cursor-pointer items-center justify-center transition-all"
+                >
+                  <span
+                    :class="user.selected ? 'flex' : 'hidden'"
+                    class="-translate-x-50% -translate-y-50% absolute left-1/2 top-1/2 cursor-pointer"
+                    >✔</span
+                  >
+                  <input
+                    class="z-3 cursor-pointer opacity-0"
+                    type="checkbox"
+                    :checked="user.selected"
+                    @click="selectUser(user)"
+                  />
+                </label>
               </div>
             </td>
-            <td class="bg-#f9fafb p-2">{{ user.name }}</td>
-            <td class="bg-white p-2">{{ user.username }}</td>
-            <td class="bg-#f9fafb p-2">{{ user.email }}</td>
-            <td class="bg-white p-2">
+            <td class="h-45px min-w-200px bg-#f9fafb p-2">{{ user.name }}</td>
+            <td class="h-45px min-w-200px bg-white p-2">{{ user.username }}</td>
+            <td class="h-45px min-w-200px bg-#f9fafb p-2">{{ user.email }}</td>
+            <td class="h-45px min-w-200px bg-white p-2">
               {{ user.address.city }}
             </td>
-            <td class="bg-#f9fafb p-2">{{ user.phone }}</td>
-            <td class="bg-white p-2">{{ user.website }}</td>
-            <td class="bg-#f9fafb p-2">
+            <td class="h-45px min-w-200px bg-#f9fafb p-2">{{ user.phone }}</td>
+            <td class="h-45px min-w-200px bg-white p-2">{{ user.website }}</td>
+            <td class="h-45px min-w-200px bg-#f9fafb p-2">
               <button @click="deleteUser(user.id)" class="mr-2 text-red-500">Delete</button>
               <button @click="editUser(user.id)" class="text-blue-500">Edit</button>
             </td>
@@ -320,6 +332,7 @@ export default defineComponent({
       <div class="ml-auto">page {{ currentPage }} of {{ totalPages }}</div>
     </div>
   </div>
+  <div class="text-16px text-center" v-else>Loading...</div>
 </template>
 
 <style scoped></style>
