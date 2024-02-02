@@ -1,34 +1,19 @@
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 import SideMenuItem from './SideMenuItem.vue'
 import { sideMenuItems } from '../data/index'
+import useSideMenuShow from '../hooks/sideMenu'
 
 export default defineComponent({
-  props: {
-    isSideMenuOpen: {
-      type: Boolean,
-      default: true
-    },
-    toggleSideMenu: {
-      type: Function as () => void, // Tipi () => void olarak belirtiliyor.
-      default: () => {}
-    }
-  },
-  setup(props) {
-    const show = ref<boolean>(false)
-
-    watch(
-      () => props.isSideMenuOpen,
-      () => {
-        show.value = props.isSideMenuOpen
-      }
-    )
+  setup() {
+    const { toggleSideMenu, isSideMenuOpen } = useSideMenuShow()
+    const { value } = toRefs(isSideMenuOpen)
 
     return {
       sideMenuItems,
-      isSideMenuOpen: props.isSideMenuOpen,
-      show
+      toggleSideMenu,
+      isSideMenuOpen: value
     }
   },
   components: { RouterLink, SideMenuItem }
@@ -37,7 +22,7 @@ export default defineComponent({
 
 <template>
   <aside
-    :class="!show ? 'hidden lg:flex' : 'flex lg:flex'"
+    :class="!isSideMenuOpen ? 'hidden lg:flex' : 'flex lg:flex'"
     class="z-100 animate-fade-in-left animate-duration-200 bg-#141c2e fixed inset-0 left-0 top-0 mb-2 ml-2 mt-2 w-60 overflow-hidden rounded-2xl text-white"
   >
     <div class="relative h-full w-full flex-col justify-center rounded-2xl">
@@ -46,7 +31,7 @@ export default defineComponent({
           <div>Hey, Name <br /></div>
           <div
             @click="toggleSideMenu"
-            v-show="show"
+            v-show="isSideMenuOpen"
             class="i-material-symbols:close-small-outline-rounded h-30px text-35px w-30px -translate-y-50% absolute right-3 top-1/2 block cursor-pointer lg:hidden"
           ></div>
         </div>

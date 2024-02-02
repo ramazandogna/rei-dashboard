@@ -1,9 +1,13 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+
+const isSideMenuOpen = reactive({
+  value: false
+})
+
 export default function useSideMenuShow() {
-  const isSideMenuOpen = ref(false)
   const toggleSideMenu = () => {
     isSideMenuOpen.value = !isSideMenuOpen.value
     console.log(isSideMenuOpen.value)
   }
-  return { isSideMenuOpen, toggleSideMenu }
+  return { toggleSideMenu, isSideMenuOpen }
 }

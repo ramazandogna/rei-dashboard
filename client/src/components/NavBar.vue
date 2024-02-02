@@ -1,20 +1,14 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { navbarItems } from '../data'
 import NavbarItem from './NavbarItem.vue'
+import useSideMenuShow from '../hooks/sideMenu'
 export default defineComponent({
-  props: {
-    isSideMenuOpen: {
-      type: Boolean,
-      default: true
-    },
-    toggleSideMenu: {
-      type: Function as () => void, // Tipi () => void olarak belirtiliyor.
-      default: () => {}
-    }
-  },
   setup() {
-    return { navbarItems }
+    const { toggleSideMenu, isSideMenuOpen } = useSideMenuShow()
+    const { value } = toRefs(isSideMenuOpen)
+
+    return { navbarItems, toggleSideMenu, isSideMenuOpen: value }
   },
   components: { NavbarItem }
 })
@@ -49,4 +43,3 @@ export default defineComponent({
     </div>
   </nav>
 </template>
-./hooks/sideMenu

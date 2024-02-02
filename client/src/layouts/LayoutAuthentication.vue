@@ -4,11 +4,9 @@ import { defineComponent, ref, onMounted, watch } from 'vue'
 import Navbar from '../components/Navbar.vue'
 import SideMenu from '../components/SideMenu.vue'
 //hooks
-import useSideMenuShow from '../hooks/sideMenu'
 export default defineComponent({
   setup() {
     const isDark = ref<boolean>(false)
-    const { isSideMenuOpen, toggleSideMenu } = useSideMenuShow()
 
     const readLocalStorage = () => {
       const storedIsDark = localStorage.getItem('isDark')
@@ -25,12 +23,9 @@ export default defineComponent({
       writeLocalStorage()
     })
 
-    watch(isSideMenuOpen, () => {
-      console.log('isSideMenuOpen:', isSideMenuOpen.value)
-    })
     console.log('dark mode:', isDark.value)
 
-    return { isDark, isSideMenuOpen, toggleSideMenu }
+    return { isDark }
   },
   components: { Navbar, SideMenu }
 })
@@ -38,8 +33,8 @@ export default defineComponent({
 
 <template>
   <div :class="{ dark: isDark }" class="font-[Open_Sans]">
-    <Navbar :toggleSideMenu="toggleSideMenu" />
-    <SideMenu :isSideMenuOpen="isSideMenuOpen" :toggleSideMenu="toggleSideMenu" />
+    <Navbar />
+    <SideMenu />
     <div class="min-h-100vh lg:ml-24px mt-14 lg:pl-60">
       <slot></slot>
     </div>
