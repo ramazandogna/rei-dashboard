@@ -5,12 +5,13 @@ import type { User } from '../../types/types'
 
 export default defineComponent({
   setup() {
-    const users = ref<User[]>([])
-    const selectAll = ref(false)
-    const sortColumn = ref<string | null>(null)
+    const users = ref<User[]>([]) //kullanıcı verisi
+    const selectAll = ref(false) //hepsini seçtin mi
+    const isSelectedAll = ref(false) //hepsi seçili mi
+    const sortColumn = ref<string | null>(null) //sıralanacak sütunu belirle
     const sortDirection = ref<number>(1) // 1: Ascending, -1: Descending
-    const currentPage = ref<number>(1)
-    const usersPerPage = 5
+    const currentPage = ref<number>(1) //mevcur sayfa
+    const usersPerPage = 5 //her sayfada gösterilecek kullanıcı sayısı
 
     //mock datayı getir
     const fetchUsers = async () => {
@@ -62,18 +63,40 @@ export default defineComponent({
     //toplam sayfa sayısını hesapla
     const totalPages = computed(() => Math.ceil(users.value.length / usersPerPage))
 
-    //sayfayı değiştir
+    //sayfayı değiştir ve değiştirirken hepsi seçili mi kontrol et
     const changePage = (page: number) => {
       if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page
+
+        //sayfa değişince mevcut sayfadaki kullanıcılarda gez ve hepsi seçili mi verilerini kontrol et
+        selectAll.value = displayedUsers.value.every(user => user.selected)
+        updateSelectedAll()
       }
     }
 
+    //kullanıcıyı seç
+    const selectUser = (user: User) => {
+      user.selected = !user.selected
+      updateSelectedAll()
+    }
+
+    //ekranda kullanıcı varsa ve hepsinin değeri true ise isSelectedAll değerini true yap
+    const updateSelectedAll = () => {
+      isSelectedAll.value =
+        displayedUsers.value.length > 0 && displayedUsers.value.every(user => user.selected)
+    }
+
+    //seçili olmayan tüm kullanıcıları seç, hepsi seçiliyse hepsini bırak
     const selectAllUsers = () => {
-      selectAll.value = !selectAll.value
+      selectAll.value = isSelectedAll.value ? false : (selectAll.value = true)
+
       // görünen tüm kullanıcıları seç
+
       displayedUsers.value.forEach(user => (user.selected = selectAll.value))
+
       // görünen tüm kullanıcıların seçim değerini selectAll.value değerine eşle
+      updateSelectedAll()
+
       displayedUsers.value.forEach(displayedUser => {
         const userIndex = users.value.findIndex(user => user.id === displayedUser.id)
         if (userIndex !== -1) {
@@ -119,18 +142,21 @@ export default defineComponent({
       currentPage,
       selectAll,
       users,
+      isSelectedAll,
       handleSort,
       changePage,
       deleteUser,
       editUser,
       selectAllUsers,
-      deleteSelectedUsers
+      deleteSelectedUsers,
+      selectUser
     }
   }
 })
 </script>
 
 <template>
+  {{ console.log(isSelectedAll) }}
   <div>
     <div class="overflow-x-auto scroll-smooth">
       <div class="h-54px mb-16px flex w-full flex-wrap items-center bg-white">
@@ -146,7 +172,7 @@ export default defineComponent({
               class="text-16px min-w-56px gap-4px cursor-ns-resize cursor-pointer items-center justify-center p-2 font-bold"
             >
               <div class="gap-4px flex h-full w-full items-center justify-center">
-                <input type="checkbox" v-model="selectAll" />
+                <input type="checkbox" v-model="selectAll" :checked="isSelectedAll" />
                 <div
                   v-show="sortColumn === 'id'"
                   :class="{
@@ -259,7 +285,7 @@ export default defineComponent({
           <tr class="animate-fade-in" v-for="user in displayedUsers" :key="user.id">
             <td class="bg-white p-2">
               <div class="flex h-full w-full items-center justify-center">
-                <input type="checkbox" v-model="user.selected" />
+                <input type="checkbox" :checked="user.selected" @change="selectUser(user)" />
               </div>
             </td>
             <td class="bg-#f9fafb p-2">{{ user.name }}</td>
