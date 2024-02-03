@@ -4,8 +4,8 @@ import LayoutAuthentication from '../layouts/LayoutAuthentication.vue'
 import SectionMain from '../components/SectionMain.vue'
 import SectionTitle from '../components/SectionTitle.vue'
 import SectionTitle2 from '../components/SectionTitle2.vue'
-import CardBox from '../components/CardBox.vue'
-import CardBoxSlim from '../components/CardBoxSlim.vue'
+import BannerCardBox from '../components/Banner/BannerCardBox.vue'
+import BannerCardBoxSlim from '../components/Banner/BannerCardBoxSlim.vue'
 import Charts from '../components/charts/Chart.vue'
 import Users from '../components/tables/UserTable.vue'
 import Introduce from '../components/Introduce.vue'
@@ -19,8 +19,8 @@ export default defineComponent({
     SectionMain,
     SectionTitle,
     SectionTitle2,
-    CardBox,
-    CardBoxSlim,
+    BannerCardBox,
+    BannerCardBoxSlim,
     Charts,
     Users,
     Introduce
@@ -34,25 +34,25 @@ export default defineComponent({
     <SectionMain>
       <SectionTitle title="Overview" icon="i-ic-baseline-table-chart"> </SectionTitle>
       <div class="mb-6 flex gap-6">
-        <CardBox></CardBox>
-        <CardBox></CardBox>
-        <CardBox></CardBox>
+        <BannerCardBox></BannerCardBox>
+        <BannerCardBox></BannerCardBox>
+        <BannerCardBox></BannerCardBox>
       </div>
       <div class="mb-6 flex flex-wrap gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
       </div>
       <div class="mb-6 flex flex-wrap gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
       </div>
       <div class="mb-6 flex flex-wrap gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
       </div>
       <div class="mb-6 flex flex-wrap gap-6">
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
-        <CardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></CardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
+        <BannerCardBoxSlim :icon="'i-material-symbols-light-money-rounded'"></BannerCardBoxSlim>
       </div>
     </SectionMain>
     <!-- Introduce Section -->

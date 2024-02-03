@@ -6,7 +6,36 @@ const routes = [
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
   },
-  // { path: '/about', component: App },
+  {
+    path: '/users',
+    name: 'Users',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Users.vue')
+  },
+  {
+    path: '/ui',
+    name: 'Ui',
+    component: () => import(/* webpackChunkName: "home" */ '../views/UI.vue')
+  },
+  {
+    path: '/tables',
+    name: 'Tables',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Tables.vue')
+  },
+  {
+    path: '/forms',
+    name: 'Forms',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Forms.vue')
+  },
+  {
+    path: '/modals',
+    name: 'Modals',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Modals.vue')
+  },
+  {
+    path: '/errors',
+    name: 'Errors',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Errors.vue')
+  },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

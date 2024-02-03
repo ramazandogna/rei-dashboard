@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import BaseIcon from './BaseIcon.vue'
+import BaseIcon from '../BaseIcon.vue'
 
 export default defineComponent({
   props: {

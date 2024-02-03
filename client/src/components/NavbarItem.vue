@@ -6,6 +6,7 @@ interface SubItem {
   title?: string
   to: RouteLocationRaw
   subItems?: SubItem[]
+  icon?: string
 }
 
 export default defineComponent({
@@ -15,7 +16,8 @@ export default defineComponent({
     logout: Number,
     title: String,
     to: String,
-    subItems: Array as () => SubItem[] | undefined
+    subItems: Array as () => SubItem[] | undefined,
+    icon: String || undefined
   },
 
   setup(props) {
@@ -37,7 +39,7 @@ export default defineComponent({
   <li
     v-if="hasDropDown"
     @click="toggleShow"
-    class="relative cursor-pointer rounded-2xl px-3 py-2 active:bg-blue-100"
+    class="relative cursor-pointer rounded-2xl px-3 py-2 active:bg-blue-300"
   >
     <div class="flex items-center">
       <span>{{ title }}</span>
@@ -56,9 +58,21 @@ export default defineComponent({
     </ul>
   </li>
   <router-link v-else-if="logout === 1" @click="handleLogOut" :to="to || ''">
-    <li :class="color" class="rounded-2xl px-3 py-2">{{ title }}</li>
+    <li v-if="title" :class="color" class="rounded-2xl px-3 py-2">{{ title }}</li>
+    <div
+      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-blue-200 shadow-sm transition-all active:bg-blue-300"
+      v-else
+    >
+      <div class="h-18px w-18px" :class="icon"></div>
+    </div>
   </router-link>
   <router-link v-else :to="to || ''">
-    <li :class="color" class="rounded-2xl px-3 py-2 text-black">{{ title }}</li>
+    <li v-if="title" :class="color" class="rounded-2xl px-3 py-2 text-black">{{ title }}</li>
+    <div
+      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-blue-200 shadow-sm transition-all active:bg-blue-300"
+      v-else
+    >
+      <div class="h-18px w-18px" :class="icon"></div>
+    </div>
   </router-link>
 </template>

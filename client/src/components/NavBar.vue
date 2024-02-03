@@ -20,12 +20,12 @@ export default defineComponent({
   >
     <div
       @click="toggleSideMenu"
-      class="hover:scale-101 flex h-12 w-12 cursor-pointer items-center justify-center shadow-sm transition-all hover:rotate-3 lg:hidden lg:items-stretch"
+      class="mr-8px hover:scale-101 h-24px w-24px p-8px flex cursor-pointer items-center justify-center rounded-2xl shadow-sm transition-all hover:rotate-3 hover:bg-blue-100 active:bg-blue-300 lg:hidden lg:items-stretch"
     >
-      <div class="w-32px h-32px i-mdi-hamburger"></div>
+      <div class="w-20px h-20px i-charm-menu-hamburger"></div>
     </div>
     <div class="flex w-full items-center justify-between">
-      <h1 class="text-20px lg:pl-1.5rem gap-8px flex pl-1">
+      <h1 class="text-20px lg:pl-1.5rem gap-8px flex cursor-pointer rounded-2xl py-2 pl-1 transition-all">
         Reî <span class="hidden lg:flex">Dashboard</span>
       </h1>
       <ul class="gap-12px decoration-none mr-1 flex items-center">
@@ -38,6 +38,7 @@ export default defineComponent({
           :subItems="navItem.subItems"
           :color="navItem.color"
           :logout="navItem.logout"
+          :icon="navItem.icon"
         />
       </ul>
     </div>
