@@ -20,7 +20,7 @@ export default defineComponent({
   >
     <div
       @click="toggleSideMenu"
-      class="mr-8px hover:scale-101 h-24px w-24px p-8px flex cursor-pointer items-center justify-center rounded-2xl shadow-sm transition-all hover:rotate-3 hover:bg-blue-100 active:bg-blue-300 lg:hidden lg:items-stretch"
+      class="mr-8px hover:scale-101 h-24px w-24px p-8px flex cursor-pointer items-center justify-center rounded-2xl shadow-sm transition-all hover:rotate-3 hover:bg-slate-100 active:bg-slate-300 lg:hidden lg:items-stretch"
     >
       <div class="w-20px h-20px i-charm-menu-hamburger"></div>
     </div>

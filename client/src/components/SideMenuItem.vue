@@ -43,7 +43,7 @@ export default defineComponent({
     >
       <div class="flex h-6 w-16 w-full items-center">
         <div class="w-64px flex items-center justify-center">
-          <div v-if="icon" class="w-20px h-20px" :class="icon || 'i-material-symbols-house'"></div>
+          <div v-if="icon" class="max-w-20px max-h-20px fill-white" v-html="icon"></div>
         </div>
         <div class="px-12px line-clamp-1 flex grow items-center text-ellipsis">{{ title }}</div>
         <div v-if="hasSubMenu" class="w-48px flex items-center justify-center">
@@ -71,4 +71,9 @@ export default defineComponent({
   </li>
 </template>
 
-<style></style>
+<style scoped>
+svg {
+  height: 20px;
+  width: 20px;
+}
+</style>

@@ -12,3 +12,12 @@ a {
   text-decoration: none !important;
   color: currentColor !important;
 }
+
+button {
+  border: none;
+}
+
+svg {
+  height: 18px;
+  width: 18px;
+}

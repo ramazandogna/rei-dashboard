@@ -20,15 +20,17 @@ export default defineComponent({
     icon: String || undefined
   },
 
-  setup(props) {
+  setup() {
     const show = ref(false)
+
     const toggleShow = () => {
       show.value = !show.value
     }
     const handleLogOut = () => {
       console.log('logout')
     }
-    return { toggleShow, show, handleLogOut, props }
+
+    return { toggleShow, show, handleLogOut }
   }
 })
 </script>
@@ -39,7 +41,7 @@ export default defineComponent({
   <li
     v-if="hasDropDown"
     @click="toggleShow"
-    class="relative cursor-pointer rounded-2xl px-3 py-2 active:bg-blue-300"
+    class="relative cursor-pointer rounded-2xl px-3 py-2 active:bg-slate-300"
   >
     <div class="flex items-center">
       <span>{{ title }}</span>
@@ -60,19 +62,21 @@ export default defineComponent({
   <router-link v-else-if="logout === 1" @click="handleLogOut" :to="to || ''">
     <li v-if="title" :class="color" class="rounded-2xl px-3 py-2">{{ title }}</li>
     <div
-      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-blue-200 shadow-sm transition-all active:bg-blue-300"
+      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-slate-600 shadow-sm transition-all hover:bg-slate-700 active:bg-slate-900"
       v-else
     >
-      <div class="h-18px w-18px" :class="icon"></div>
+      <div v-html="icon" />
     </div>
   </router-link>
   <router-link v-else :to="to || ''">
     <li v-if="title" :class="color" class="rounded-2xl px-3 py-2 text-black">{{ title }}</li>
     <div
-      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-blue-200 shadow-sm transition-all active:bg-blue-300"
+      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-slate-600 shadow-sm transition-all hover:bg-slate-700 active:bg-slate-900"
       v-else
     >
-      <div class="h-18px w-18px" :class="icon"></div>
+      <div v-html="icon" />
     </div>
   </router-link>
 </template>
+
+<style></style>

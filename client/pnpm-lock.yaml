@@ -53,7 +53,7 @@ devDependencies:
     specifier: ^0.58.4
     version: 0.58.4(postcss@8.4.33)(vite@5.0.12)
   vite:
-    specifier: ^5.0.8
+    specifier: ^5.0.12
     version: 5.0.12
   vue-tsc:
     specifier: ^1.8.25
