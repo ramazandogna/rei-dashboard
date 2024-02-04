@@ -5,11 +5,11 @@ export default defineComponent({
   props: {
     width: {
       type: String,
-      default: 'w-500px'
+      default: 'min-w-500px w-500px'
     },
     height: {
       type: String,
-      default: 'h-282px'
+      default: 'min-h-282px'
     },
     background: {
       type: String,
@@ -30,7 +30,7 @@ export default defineComponent({
   <div class="p-24px grow">
     <div
       class="mx-auto box-border cursor-copy rounded-2xl p-6 shadow transition-all hover:shadow-xl"
-      :class="[height, width, background, centered ? 'flex items-center justify-center' : '']"
+      :class="[height, width, background, centered ? 'gap-8px flex items-center justify-center' : '']"
     >
       <slot />
     </div>

@@ -3,9 +3,11 @@ import { defineComponent, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import type { User } from '../../types/types'
 import SectionMain from '../SectionMain.vue'
+import Loader from '../Loader.vue'
 
 export default defineComponent({
   setup() {
+    const loader = ref(true)
     const users = ref<User[]>([]) //kullanıcı verisi
     const selectAll = ref(false) //hepsini seçtin mi
     const isSelectedAll = ref(false) //hepsi seçili mi
@@ -20,6 +22,8 @@ export default defineComponent({
         users.value = response.data
       } catch (error) {
         console.log(error)
+      } finally {
+        loader.value = false
       }
     }
     //arama yap
@@ -118,7 +122,9 @@ export default defineComponent({
       return { selectedUsers }
     }
     onMounted(() => {
-      fetchUsers()
+      setTimeout(() => {
+        fetchUsers()
+      }, 1000)
     })
     return {
       displayedUsers,
@@ -129,6 +135,7 @@ export default defineComponent({
       selectAll,
       users,
       isSelectedAll,
+      loader,
       handleSort,
       changePage,
       deleteUser,
@@ -138,20 +145,20 @@ export default defineComponent({
       selectUser
     }
   },
-  components: { SectionMain }
+  components: { SectionMain, Loader }
 })
 </script>
 
 <template>
-  <div v-if="users.length > 0">
+  <div v-if="!loader && users.length > 0">
     <div class="h-54px mb-16px flex w-full flex-wrap items-center bg-white">
       <div class="gap-4px text-12.5px flex cursor-not-allowed" :key="user.id" v-for="user in users">
-        <span class="p-4px mr-4px rounded-full bg-blue-100" v-if="user.selected">{{ user.name }}</span>
+        <span class="p-4px mr-4px rounded-full bg-slate-100" v-if="user.selected">{{ user.name }}</span>
       </div>
     </div>
     <div class="overflow-x-auto scroll-smooth">
       <table class="mt-4px min-h-450px min-w-full border-collapse border border-gray-300">
-        <thead class="bg-blue-100">
+        <thead class="bg-slate-100">
           <tr class="min-h-50px">
             <th
               @click="selectAllUsers"
@@ -159,7 +166,7 @@ export default defineComponent({
             >
               <div class="gap-4px flex h-full w-full items-center justify-center">
                 <label
-                  :class="isSelectedAll ? 'bg-blue-300' : 'border bg-white'"
+                  :class="isSelectedAll ? 'bg-slate-300' : 'border bg-white'"
                   class="w-20px h-20px rounded-4px relative flex cursor-pointer items-center justify-center transition-all"
                   for="selectAll"
                 >
@@ -283,7 +290,7 @@ export default defineComponent({
             <td class="h-45px w-100px bg-white p-2">
               <div class="flex h-full w-full items-center justify-center">
                 <label
-                  :class="user.selected ? 'bg-blue-300' : 'border bg-white'"
+                  :class="user.selected ? 'bg-slate-300' : 'border bg-white'"
                   class="w-20px h-20px rounded-4px relative flex cursor-pointer items-center justify-center transition-all"
                 >
                   <span
@@ -322,17 +329,17 @@ export default defineComponent({
         :key="page"
         @click="() => changePage(page)"
         :class="{
-          'p-4px w-22px h-22px flex items-center bg-blue-300 text-black ': currentPage === page,
+          'p-4px w-22px h-22px flex items-center bg-slate-300 text-black ': currentPage === page,
           'mx-2px': true
         }"
-        class="p-4px w-22px h-22px flex cursor-pointer items-center justify-center rounded hover:bg-blue-200"
+        class="p-4px w-22px h-22px flex cursor-pointer items-center justify-center rounded hover:bg-slate-200"
       >
         {{ page }}
       </div>
       <div class="ml-auto">page {{ currentPage }} of {{ totalPages }}</div>
     </div>
   </div>
-  <div class="text-16px text-center" v-else>Loading...</div>
+  <Loader v-else-if="loader" />
 </template>
 
 <style scoped></style>

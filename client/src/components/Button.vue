@@ -4,23 +4,30 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     to: String || undefined,
-    buttonSize: {
-      type: String,
-      default: 'px-16px py-8px'
-    },
     buttonText: {
-      type: String,
-      default: 'text-14px'
+      type: String as () => 'text-text' | 'text-bg',
+      default: 'text-bg'
     },
     buttonColor: {
-      type: String,
-      default: 'text-white hover:bg-green-600 bg-green'
+      type: String as () => 'bgSlate' | 'bgBlue' | 'bgError' | 'bgSuccess',
+      default: 'bgSlate'
     },
-    buttonType: String,
-    title: String,
+    title: String || undefined,
     isIcon: {
       type: Boolean,
       default: false
+    },
+    buttonType: {
+      type: String as () => 'normal' | 'mini',
+      default: 'normal'
+    },
+    iconColor: {
+      type: String as () => 'text-text' | 'text-bg',
+      default: 'text-bg'
+    },
+    icon: {
+      type: String,
+      default: 'i-ooui-link-external-ltr'
     }
   },
   setup() {
@@ -29,13 +36,35 @@ export default defineComponent({
 })
 </script>
 <template>
-  <router-link :to="to || ''">
+  <router-link v-if="title && buttonType === 'normal'" :to="to || ''">
     <button
-      class="gap-8px flex cursor-pointer items-center justify-center rounded-2xl transition-all hover:shadow"
-      :class="buttonSize buttonColor buttonType"
+      class="gap-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
+      :class="buttonColor"
     >
-      <div v-show="isIcon" class="w-16px h-16px i-mynaui-external-link" />
-      <div v-show="title">{{ title }}</div>
+      <div v-show="isIcon" class="w-24px h-24px flex items-center justify-center">
+        <div :class="(iconColor, icon)" class="w-16px h-16px bg-white" />
+      </div>
+      <div class="px-4px text-16px" :class="buttonText">{{ title }}</div>
+    </button>
+  </router-link>
+  <router-link v-else-if="title && buttonType === 'mini' && !isIcon" :to="to || ''">
+    <button
+      class="min-w-70px text-12px min-h-26px flex cursor-pointer items-center justify-center rounded-2xl transition-all transition-all hover:shadow"
+      :class="buttonColor"
+    >
+      <div class="flex cursor-pointer items-center justify-center text-white">
+        {{ title }}
+      </div>
+    </button>
+  </router-link>
+  <router-link v-if="!title" :to="to || ''">
+    <button
+      class="gap-8px p-4px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
+      :class="buttonColor"
+    >
+      <div class="w-24px h-24px flex items-center justify-center">
+        <div :class="(iconColor, icon)" class="w-16px h-16px bg-white" />
+      </div>
     </button>
   </router-link>
 </template>
