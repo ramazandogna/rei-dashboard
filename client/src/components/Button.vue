@@ -2,7 +2,9 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  emits: ['click'],
   props: {
+    class: String || undefined,
     to: String || undefined,
     buttonText: {
       type: String as () => 'text-text' | 'text-bg',
@@ -38,6 +40,7 @@ export default defineComponent({
 <template>
   <router-link v-if="title && buttonType === 'normal'" :to="to || ''">
     <button
+      @click="$emit('click')"
       class="gap-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
       :class="buttonColor"
     >
@@ -49,6 +52,7 @@ export default defineComponent({
   </router-link>
   <router-link v-else-if="title && buttonType === 'mini' && !isIcon" :to="to || ''">
     <button
+      @click="$emit('click')"
       class="min-w-70px text-12px min-h-26px flex cursor-pointer items-center justify-center rounded-2xl transition-all transition-all hover:shadow"
       :class="buttonColor"
     >
@@ -59,6 +63,7 @@ export default defineComponent({
   </router-link>
   <router-link v-if="!title" :to="to || ''">
     <button
+      @click="$emit('click')"
       class="gap-8px p-4px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
       :class="buttonColor"
     >

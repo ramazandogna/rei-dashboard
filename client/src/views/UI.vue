@@ -7,11 +7,14 @@ import SectionTitle2 from '../components/SectionTitle2.vue'
 import CardBox from '../components/CardBox.vue'
 import Button from '../components/Button.vue'
 import Bar from '../components/Bar.vue'
+import Modal from '../components/Modal.vue'
+import useModalShow from '../hooks/modal'
 export default defineComponent({
   setup() {
-    return {}
+    const { toggleModal } = useModalShow()
+    return { toggleModal }
   },
-  components: { SectionMain, SectionTitle, LayoutAuthentication, SectionTitle2, CardBox, Button, Bar }
+  components: { SectionMain, SectionTitle, LayoutAuthentication, SectionTitle2, CardBox, Button, Bar, Modal }
 })
 </script>
 
@@ -29,7 +32,18 @@ export default defineComponent({
         <Button :buttonColor="'bgBlue'" />
       </CardBox>
       <SectionTitle2 title="Section Title 2" />
-      <CardBox centered> Modal is will be here.. </CardBox>
+      <CardBox centered>
+        <Button isIcon title="Modal" @click="toggleModal"></Button>
+        <Modal :style="'w-250px h-250px'">
+          <div class="flex h-full w-full flex-col justify-between">
+            <h2 class="text-24px text-center">This is modal</h2>
+            <div class="gap-4px flex items-end">
+              <Button isIcon title="Modal" />
+              <span class="ml-auto"><Button isIcon :button-color="'bgError'" /></span>
+            </div>
+          </div>
+        </Modal>
+      </CardBox>
       <SectionMain>
         <Bar title="Normal" />
         <Bar barType="error" title="Error" barRight>

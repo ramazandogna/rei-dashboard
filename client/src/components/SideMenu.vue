@@ -23,11 +23,11 @@ export default defineComponent({
 <template>
   <aside
     :class="!isSideMenuOpen ? 'hidden lg:flex' : 'flex lg:flex'"
-    class="z-100 animate-fade-in-left animate-duration-200 bg-#141c2e fixed inset-0 left-0 top-0 mb-2 ml-2 mt-2 w-60 overflow-hidden rounded-2xl text-white"
+    class="z-100 animate-fade-in-left animate-duration-200 bg-#141c2e fixed inset-0 left-0 top-0 mb-2 ml-2 mt-2 w-60 overflow-hidden rounded text-white"
   >
-    <div class="relative h-full w-full flex-col justify-center rounded-2xl">
+    <div class="relative h-full w-full flex-col justify-center rounded">
       <div class="flex h-full flex-col">
-        <div class="relative flex h-14 items-center justify-center rounded-t-2xl font-bold">
+        <div class="rounded-t- relative flex h-14 items-center justify-center font-bold">
           <div>Hey, Name <br /></div>
           <div
             @click="toggleSideMenu"
@@ -48,7 +48,7 @@ export default defineComponent({
             />
           </ul>
         </div>
-        <div class="flex w-full cursor-pointer items-center rounded-b-2xl bg-blue-500 hover:bg-blue-700">
+        <div class="rounded-b- flex w-full cursor-pointer items-center bg-blue-500 hover:bg-blue-700">
           <RouterLink class="flex cursor-pointer py-3 text-white" to="/styles">
             <div class="inline-flex h-6 w-16 flex-none items-center justify-center">
               <div class="i-material-symbols-account-balance w-18px h-18px"></div>

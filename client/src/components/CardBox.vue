@@ -3,6 +3,10 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
+    style: {
+      type: String,
+      default: ''
+    },
     width: {
       type: String,
       default: 'min-w-500px w-500px'
@@ -29,8 +33,8 @@ export default defineComponent({
 <template>
   <div class="p-24px grow">
     <div
-      class="mx-auto box-border cursor-copy rounded-2xl p-6 shadow transition-all hover:shadow-xl"
-      :class="[height, width, background, centered ? 'gap-8px flex items-center justify-center' : '']"
+      class="relative mx-auto box-border cursor-copy rounded-2xl p-6 shadow transition-all hover:shadow-xl"
+      :class="[height, width, style, background, centered ? 'gap-8px flex items-center justify-center' : '']"
     >
       <slot />
     </div>
