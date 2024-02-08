@@ -5,10 +5,20 @@ import presetUno from '@unocss/preset-uno'
 
 export default defineConfig({
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'ui-sans-serif', 'system-ui'] // Open Sans fontunu varsayılan sans-serif fontu olarak ekleyin
+      }
+    },
     colors: {
-      text: 'rgb(30 41 59, 1)',
+      text: '#1E293B',
       bg: '#f9fafb',
-      warning: '#aa2629'
+      warning: '#aa2629',
+      Slate: '#334155',
+      Success: '#3a9e45 ',
+      Error: '#8f2228 ',
+      Blue: '#0d9aea ',
+      Purple: '#6236ff'
     }
   },
   shortcuts: [
@@ -19,10 +29,7 @@ export default defineConfig({
       bgSuccess: 'bg-#3a9e45 hover:bg-#2e8b38 active:bg-#276e30',
       bgError: 'bg-#8f2228 hover:bg-#aa2629 active:bg-#7a2128',
       bgBlue: 'bg-#0d9aea hover:bg-#0174be active:bg-#0261a2',
-      Slate: 'bg-slate-700 ',
-      Success: 'bg-#3a9e45 ',
-      Error: 'bg-#8f2228 ',
-      Blue: 'bg-#0d9aea '
+      bgPurple: 'bg-#6236ff hover:bg-#4f1ed6 active:bg-#3e1aaf'
     }
   ],
   presets: [

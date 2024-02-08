@@ -32,7 +32,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div :class="{ dark: isDark }" class="font-[Open_Sans]">
+  <div :class="{ dark: isDark }">
     <Navbar />
     <SideMenu />
     <div class="min-h-100vh lg:ml-24px mt-14 lg:pl-60">
