@@ -30,12 +30,12 @@ export default defineComponent({
   <div
     :class="
       barType === 'normal'
-        ? 'Slate'
+        ? 'bg-Slate'
         : barType === 'success'
-          ? 'Success'
+          ? 'bg-Success'
           : barType === 'error'
-            ? 'Error'
-            : 'Blue'
+            ? 'bg-Error'
+            : 'bg-Blue'
     "
     class="min-h-42px mb-6 items-center justify-center rounded-lg px-3 py-6 transition-colors duration-150 last:mb-0 md:flex md:py-3"
   >

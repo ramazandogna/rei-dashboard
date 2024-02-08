@@ -51,7 +51,7 @@ export default defineComponent({
         <div class="rounded-b- flex w-full cursor-pointer items-center bg-blue-500 hover:bg-blue-700">
           <RouterLink class="flex cursor-pointer py-3 text-white" to="/styles">
             <div class="inline-flex h-6 w-16 flex-none items-center justify-center">
-              <div class="i-material-symbols-account-balance w-18px h-18px"></div>
+              <div class="i-line-md-log-out w-18px h-18px"></div>
             </div>
             <span class="line-clamp-1 flex grow items-center text-ellipsis pr-12">Logout</span>
           </RouterLink>

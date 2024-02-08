@@ -11,7 +11,13 @@ export default defineComponent({
       default: 'text-bg'
     },
     buttonColor: {
-      type: String as () => 'bgSlate' | 'bgBlue' | 'bgError' | 'bgSuccess',
+      type: String as () =>
+        | 'bgSlate'
+        | 'bgBlue'
+        | 'bgError'
+        | 'bgSuccess'
+        | 'bgPurple'
+        | 'gradient-background-button',
       default: 'bgSlate'
     },
     title: String || undefined,
@@ -41,7 +47,7 @@ export default defineComponent({
   <router-link v-if="title && buttonType === 'normal'" :to="to || ''">
     <button
       @click="$emit('click')"
-      class="gap-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
+      class="gap-4px px-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
       :class="buttonColor"
     >
       <div v-show="isIcon" class="w-24px h-24px flex items-center justify-center">

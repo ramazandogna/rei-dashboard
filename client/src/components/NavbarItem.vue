@@ -62,7 +62,7 @@ export default defineComponent({
   <router-link v-else-if="logout === 1" @click="handleLogOut" :to="to || ''">
     <li v-if="title" :class="color" class="rounded-2xl px-3 py-2">{{ title }}</li>
     <div
-      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-slate-600 shadow-sm transition-all hover:bg-slate-700 active:bg-slate-900"
+      class="w-32px h-32px bgSlate flex items-center justify-center rounded-2xl shadow-sm transition-all"
       v-else
     >
       <div v-html="icon" />
@@ -71,7 +71,7 @@ export default defineComponent({
   <router-link v-else :to="to || ''">
     <li v-if="title" :class="color" class="rounded-2xl px-3 py-2 text-black">{{ title }}</li>
     <div
-      class="w-20px h-20px p-8px flex items-center justify-center rounded-2xl bg-slate-600 shadow-sm transition-all hover:bg-slate-700 active:bg-slate-900"
+      class="w-32px h-32px bgSlate flex items-center justify-center rounded-2xl shadow-sm transition-all"
       v-else
     >
       <div v-html="icon" />

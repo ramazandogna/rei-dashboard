@@ -13,7 +13,7 @@
     >
       <circle
         fill="none"
-        stroke="#000000"
+        stroke="#334155"
         stroke-width="6"
         stroke-miterlimit="15"
         stroke-dasharray="14.2472,14.2472"
@@ -33,7 +33,7 @@
       </circle>
       <circle
         fill="none"
-        stroke="#000000"
+        stroke="#334155"
         stroke-width="1"
         stroke-miterlimit="10"
         stroke-dasharray="10,10"
@@ -51,7 +51,7 @@
           repeatCount="indefinite"
         />
       </circle>
-      <g fill="#000000">
+      <g fill="#334155">
         <rect x="30" y="35" width="5" height="30">
           <animateTransform
             attributeName="transform"

@@ -38,10 +38,10 @@ export default defineComponent({
   <li>
     <RouterLink
       :to="to || ''"
-      class="hover:scale-100.5 flex cursor-pointer py-3 text-blue-600 transition-all hover:text-black hover:shadow"
+      class="hover:scale-101 flex cursor-pointer py-3 text-blue-600 transition-all hover:text-black hover:shadow"
       @click.prevent="toggleShowSub"
     >
-      <div class="flex h-6 w-16 w-full items-center">
+      <div class="flex h-6 w-16 grow items-center">
         <div class="w-64px flex items-center justify-center">
           <div v-if="icon" class="max-w-20px max-h-20px fill-white" v-html="icon"></div>
         </div>
@@ -70,10 +70,3 @@ export default defineComponent({
     </ul>
   </li>
 </template>
-
-<style scoped>
-svg {
-  height: 20px;
-  width: 20px;
-}
-</style>

@@ -44,6 +44,20 @@ export default defineComponent({
           </div>
         </Modal>
       </CardBox>
+      <CardBox background="" centered>
+        <div class="input">
+          <i
+            class="text-#9e9e9e z-1 h-24px w-24px left-14px i-line-md-cog-loop absolute flex h-full items-center"
+          />
+          <input type="text" placeholder=" " id="username" />
+          <label class="cursor-text" for="username">Username</label>
+          <div
+            class="w-42px z-4 right-14px h-42px -translate-y-50% hover:bg-#6236ff30 active:bg-#6236ff50 duration-400 absolute top-1/2 flex cursor-pointer items-center justify-center rounded-full transition-all"
+          >
+            <i class="h-24px w-24px i-line-md-watch-loop text-#00000090" />
+          </div>
+        </div>
+      </CardBox>
       <SectionMain>
         <Bar title="Normal" />
         <Bar barType="error" title="Error" barRight>
@@ -56,3 +70,5 @@ export default defineComponent({
     </SectionMain>
   </LayoutAuthentication>
 </template>
+
+<style></style>
