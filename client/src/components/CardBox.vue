@@ -33,7 +33,7 @@ export default defineComponent({
 <template>
   <div class="p-24px grow">
     <div
-      class="relative mx-auto box-border cursor-copy rounded-2xl p-6 shadow transition-all hover:shadow-xl"
+      class="relative mx-auto box-border cursor-copy rounded p-6 shadow transition-all hover:shadow-xl"
       :class="[height, width, style, background, centered ? 'gap-8px flex items-center justify-center' : '']"
     >
       <slot />

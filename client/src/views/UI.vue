@@ -44,22 +44,18 @@ export default defineComponent({
           </div>
         </Modal>
       </CardBox>
-      <CardBox background="" centered>
+      <CardBox centered>
+        <h2 class="text-24px">Input</h2>
         <div class="input">
           <i
             class="text-#9e9e9e z-1 h-24px w-24px left-14px i-line-md-cog-loop absolute flex h-full items-center"
           />
           <input type="text" placeholder=" " id="username" />
           <label class="cursor-text" for="username">Username</label>
-          <div
-            class="w-42px z-4 right-14px h-42px -translate-y-50% hover:bg-#6236ff30 active:bg-#6236ff50 duration-400 absolute top-1/2 flex cursor-pointer items-center justify-center rounded-full transition-all"
-          >
-            <i class="h-24px w-24px i-line-md-watch-loop text-#00000090" />
-          </div>
         </div>
       </CardBox>
       <SectionMain>
-        <Bar title="Normal" />
+        <Bar :barClose="true" title="Normal" />
         <Bar barType="error" title="Error" barRight>
           <Button buttonType="mini" title="Mini" buttonColor="bgBlue"></Button>
         </Bar>
@@ -71,4 +67,50 @@ export default defineComponent({
   </LayoutAuthentication>
 </template>
 
-<style></style>
+<style scoped>
+/* floating label */
+.input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #0000000d;
+  border-radius: 4px;
+}
+
+input {
+  border: none;
+  flex-grow: 1;
+  height: 46px;
+  padding-top: 10px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 300;
+  transition: all 0.4s ease;
+  border-radius: 4px;
+  padding-left: 52px;
+  z-index: 2;
+}
+
+.input input:focus {
+  outline: none;
+  border-bottom: 1px solid #6236ff;
+  box-shadow: 0 1px 0 0 #6236ff;
+}
+
+label {
+  left: 52px;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s ease;
+  color: #00000090;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+  transform: translateY(-17px);
+  font-size: 12px;
+  color: #6236ff;
+}
+</style>

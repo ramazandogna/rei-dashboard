@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   props: {
@@ -19,15 +19,26 @@ export default defineComponent({
     barRightContent: {
       type: String,
       default: ''
+    },
+    barClose: {
+      type: Boolean,
+      default: false
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    const barClose = ref<boolean>(props.barClose)
+    const barShow = ref<boolean>(true)
+    const toggleBarClose = () => {
+      barClose.value = !barClose.value
+      barShow.value = !barShow.value
+    }
+    return { barClose, toggleBarClose, barShow }
   }
 })
 </script>
 <template>
   <div
+    v-if="barShow"
     :class="
       barType === 'normal'
         ? 'bg-Slate'
@@ -37,7 +48,7 @@ export default defineComponent({
             ? 'bg-Error'
             : 'bg-Blue'
     "
-    class="min-h-42px mb-6 items-center justify-center rounded-lg px-3 py-6 transition-colors duration-150 last:mb-0 md:flex md:py-3"
+    class="min-h-42px mb-6 items-center justify-center rounded px-3 py-6 transition-colors duration-150 last:mb-0 md:flex md:py-3"
   >
     <div class="block grow items-center justify-between md:flex">
       <div class="mb-6 flex items-center justify-center md:mb-0">
@@ -57,11 +68,18 @@ export default defineComponent({
               ]"
             ></div>
           </span>
-          <span :class="barText" class="ml-8px text-center md:py-2 md:text-left">{{ title }} </span>
+          <span :class="barText" class="ml-8px text-16px text-center md:py-2 md:text-left">{{ title }} </span>
         </div>
       </div>
-      <div v-show="barRight" class="flex items-center justify-center">
+      <div v-if="!barClose" v-show="barRight" class="flex items-center justify-center">
         <span :class="barText" class="text-center md:py-2 md:text-left"> <slot></slot> </span>
+      </div>
+      <div
+        @click="toggleBarClose"
+        v-if="barClose"
+        class="w-32px h-32px bg-bg/30 active:bg-bg/50 hover:bg-bg/40 shadow-bg/20 md:mr-none mx-auto flex w-full cursor-pointer items-center justify-center rounded-full transition-all hover:shadow-lg"
+      >
+        <div class="i-ic-baseline-cancel w-20px h-20px bg-bg" />
       </div>
     </div>
   </div>

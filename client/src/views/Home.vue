@@ -9,6 +9,7 @@ import BannerCardBoxSlim from '../components/Banner/BannerCardBoxSlim.vue'
 import Charts from '../components/charts/Chart.vue'
 import Users from '../components/tables/UserTable.vue'
 import Introduce from '../components/Introduce.vue'
+import Bar from '../components/Bar.vue'
 
 export default defineComponent({
   setup() {
@@ -23,7 +24,8 @@ export default defineComponent({
     BannerCardBoxSlim,
     Charts,
     Users,
-    Introduce
+    Introduce,
+    Bar
   }
 })
 </script>
@@ -33,7 +35,7 @@ export default defineComponent({
     <!-- Overview Section -->
     <SectionMain>
       <SectionTitle title="Overview" icon="i-ic-baseline-table-chart"> </SectionTitle>
-      <div class="mb-6 flex gap-6">
+      <div class="mb-6 flex flex-wrap gap-6 md:flex-none">
         <BannerCardBox></BannerCardBox>
         <BannerCardBox></BannerCardBox>
         <BannerCardBox></BannerCardBox>
@@ -68,6 +70,10 @@ export default defineComponent({
     <!-- Kullanıcı Tablosu Section -->
     <SectionMain class="mt-48px">
       <SectionTitle title="Users" icon="i-material-symbols-person-pin-rounded"> </SectionTitle>
+      <Bar
+        barClose
+        title="Bu standart bir uyarı mesajıdır. Eğer uyarıyı kapatmak istiyorsanız iconu kullanın! "
+      />
       <Users />
     </SectionMain>
   </LayoutAuthentication>

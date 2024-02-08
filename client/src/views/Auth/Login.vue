@@ -43,11 +43,11 @@ export default defineComponent({
 <template>
   <div class="gradient-background fixed inset-0 flex items-center justify-center">
     <div
-      class="bg-bg w-450px p-24px gap-16px fixed bottom-4 right-4 top-4 flex flex-col [box-shadow:_10px_0_10px_-5px_rgba(0,_0,_0,_0.5)]"
+      class="bg-bg sm:w-450px p-24px gap-16px fixed bottom-4 left-4 right-4 top-4 flex flex-col [box-shadow:_10px_0_10px_-5px_rgba(0,_0,_0,_0.5)] sm:left-auto"
     >
       <router-link to="/">
         <img
-          class="w-50px -translate-x-50% absolute absolute right-4 top-4 mx-auto rounded-full opacity-40 shadow-lg transition-all hover:scale-105 hover:shadow-2xl"
+          class="w-50px -translate-x-50% absolute absolute right-4 top-4 mx-auto rounded-full opacity-60 shadow-lg transition-all hover:scale-105 hover:opacity-100 hover:shadow-2xl"
           src="../../assets/vue-svgrepo-com.svg"
           alt="dashboard-logo"
         />
@@ -109,7 +109,7 @@ input {
   font-size: 14px;
   font-weight: 300;
   transition: all 0.4s ease;
-  border-radius: 2px;
+  border-radius: 4px;
   padding-left: 52px;
   z-index: 2;
 }

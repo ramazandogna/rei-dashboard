@@ -47,7 +47,7 @@ export default defineComponent({
   <router-link v-if="title && buttonType === 'normal'" :to="to || ''">
     <button
       @click="$emit('click')"
-      class="gap-4px px-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
+      class="gap-4px active:scale-100.5 active:translate-y-1px px-8px min-w-90px min-h-42px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
       :class="buttonColor"
     >
       <div v-show="isIcon" class="w-24px h-24px flex items-center justify-center">
@@ -59,7 +59,7 @@ export default defineComponent({
   <router-link v-else-if="title && buttonType === 'mini' && !isIcon" :to="to || ''">
     <button
       @click="$emit('click')"
-      class="min-w-70px text-12px min-h-26px flex cursor-pointer items-center justify-center rounded-2xl transition-all transition-all hover:shadow"
+      class="min-w-70px active:scale-100.5 active:translate-y-1px text-12px min-h-26px flex cursor-pointer items-center justify-center rounded-2xl transition-all transition-all hover:shadow"
       :class="buttonColor"
     >
       <div class="flex cursor-pointer items-center justify-center text-white">
@@ -70,7 +70,7 @@ export default defineComponent({
   <router-link v-if="!title" :to="to || ''">
     <button
       @click="$emit('click')"
-      class="gap-8px p-4px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
+      class="gap-8px active:scale-100.5 active:translate-y-1px p-4px flex cursor-pointer items-center justify-center rounded transition-all hover:shadow"
       :class="buttonColor"
     >
       <div class="w-24px h-24px flex items-center justify-center">

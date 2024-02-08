@@ -48,8 +48,8 @@ export default defineComponent({
             />
           </ul>
         </div>
-        <div class="rounded-b- flex w-full cursor-pointer items-center bg-blue-500 hover:bg-blue-700">
-          <RouterLink class="flex cursor-pointer py-3 text-white" to="/styles">
+        <div class="gradient-background flex w-full cursor-pointer items-center">
+          <RouterLink class="text-text flex cursor-pointer py-3" to="/login">
             <div class="inline-flex h-6 w-16 flex-none items-center justify-center">
               <div class="i-line-md-log-out w-18px h-18px"></div>
             </div>

@@ -9,7 +9,7 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div class="box-border grow cursor-copy rounded-2xl bg-white p-6 shadow transition-all hover:shadow-xl">
+  <div class="box-border grow cursor-copy rounded bg-white p-6 shadow transition-all hover:shadow-xl">
     <div class="mb-12px">
       <Button button-type="mini" title="buton" />
     </div>

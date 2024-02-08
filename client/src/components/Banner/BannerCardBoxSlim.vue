@@ -16,9 +16,7 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div
-    class="box-border flex grow cursor-copy rounded-2xl bg-white p-6 shadow transition-all hover:shadow-xl"
-  >
+  <div class="box-border flex grow cursor-copy rounded bg-white p-6 shadow transition-all hover:shadow-xl">
     <div
       class="mr-6 flex h-12 w-12 items-center justify-center rounded-full shadow transition-all hover:shadow-xl"
     >
