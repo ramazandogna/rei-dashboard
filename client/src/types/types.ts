@@ -35,4 +35,14 @@ export interface Company {
   bs: string
 }
 
-//
+//user endpoint response
+export interface UserResponse {
+  id: number
+  name: string
+  surname: string
+  username: string
+  email: string
+  userRole: string
+  company: string
+  iat?: number
+}

@@ -5,56 +5,55 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/users',
     name: 'Users',
     component: () => import(/* webpackChunkName: "home" */ '../views/Users.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/ui',
     name: 'Ui',
     component: () => import(/* webpackChunkName: "home" */ '../views/UI.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/tables',
     name: 'Tables',
     component: () => import(/* webpackChunkName: "home" */ '../views/Tables.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/forms',
     name: 'Forms',
     component: () => import(/* webpackChunkName: "home" */ '../views/Forms.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/modals',
     name: 'Modals',
     component: () => import(/* webpackChunkName: "home" */ '../views/Modals.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/errors',
     name: 'Errors',
     component: () => import(/* webpackChunkName: "home" */ '../views/Errors.vue'),
-    meta: { requiresUnauth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "home" */ '../views/Auth/Login.vue'),
-
-    meta: { requiresAuth: true }
+    meta: { requiresUnauth: true }
   },
   {
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "home" */ '../views/Auth/Register.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresUnauth: true }
   },
   {
     path: '/:pathMatch(.*)*',
@@ -67,12 +66,16 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, _from, next) => {
-  if (to.meta.requiresAuth && !localStorage.getItem('token')) {
-    next('/')
-  } else if (to.meta.requiresUnauth && localStorage.getItem('token')) {
+router.beforeEach(async (to, _from, next) => {
+  const token = document.cookie.split('=')[0] === 'token'
+  if (!token && to.meta.requiresAuth) {
+    // Kullanıcı giriş yapmamışsa ve giriş yapılması gereken bir sayfaya erişmeye çalışıyorsa
     next('/login')
+  } else if (token && to.meta.requiresUnauth) {
+    // Kullanıcı giriş yapmışsa ve giriş yapılmaması gereken bir sayfaya erişmeye çalışıyorsa
+    next('/')
   } else {
+    // Diğer durumlarda normal şekilde devam et
     next()
   }
 })
