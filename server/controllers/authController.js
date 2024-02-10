@@ -53,7 +53,7 @@ const register = async (req, res) => {
         }
         if(!emailValidate(email)){
             return res.json({
-                error: 'Please enter invalid email services',
+                error: 'Please enter valid email services',
             });
         }
         const existEmail = await User.findOne({email});

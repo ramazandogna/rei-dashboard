@@ -1,12 +1,20 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
+import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
+//components
 import Button from '../../components/Button.vue'
+import { useRouter } from 'vue-router'
 
 type InputType = 'password' | 'text'
 
 export default defineComponent({
   setup() {
+    const router = useRouter()
+    const toast = useToast()
+    //refs
     const inputType = ref<InputType>('password')
 
     const togglePassword = () => {
@@ -23,12 +31,33 @@ export default defineComponent({
       repassword: ''
     })
 
-    const handleSubmit = () => {
-      if (auth.email !== '' || auth.password !== '') {
-        console.log('auth: ', auth)
-        auth.email = ''
-        auth.password = ''
-        console.log('auth: ', auth)
+    const handleSubmit = async () => {
+      if (auth.password !== auth.repassword) {
+        alert('Passwords do not match')
+      } else {
+        const { name, surname, username, email, company, password } = auth
+        try {
+          const response = await axios.post('http://localhost:8000/auth/register', {
+            name,
+            surname,
+            username,
+            email,
+            company,
+            password,
+            userRole: 'user'
+          })
+          const data = response.data
+          if (data.error) {
+            toast.error(data.error)
+          } else {
+            toast.success('Register success, your are redirecting to login page.')
+            setTimeout(() => {
+              router.push('/login')
+            }, 2000)
+          }
+        } catch (error) {
+          console.error(error)
+        }
       }
     }
 
@@ -58,46 +87,47 @@ export default defineComponent({
         />
       </router-link>
       <h1 class="mt-12px text-2xl font-bold">Register</h1>
+
       <div class="input">
         <i
           class="i-icon-park-solid-edit-name text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="name" />
+        <input v-model="auth.name" type="text" placeholder=" " id="name" />
         <label class="cursor-text" for="name">Name</label>
       </div>
       <div class="input">
         <i
           class="i-fluent-rename-28-filled text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="surname" />
+        <input v-model="auth.surname" type="text" placeholder=" " id="surname" />
         <label class="cursor-text" for="surname">Surname</label>
       </div>
       <div class="input">
         <i
           class="i-material-symbols-person-raised-hand-rounded text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="username" />
+        <input v-model="auth.username" type="text" placeholder=" " id="username" />
         <label class="cursor-text" for="username">Username</label>
       </div>
       <div class="input">
         <i
           class="i-material-symbols-stacked-email-outline text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="email" />
+        <input v-model="auth.email" type="email" placeholder=" " id="email" />
         <label class="cursor-text" for="email">Email</label>
       </div>
       <div class="input">
         <i
           class="i-mdi-office-building-outline text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="company" />
+        <input v-model="auth.company" type="text" placeholder=" " id="company" />
         <label class="cursor-text" for="company">Company</label>
       </div>
       <div class="input">
         <i
           class="i-material-symbols-password text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input :type="inputType" placeholder=" " id="password" />
+        <input v-model="auth.password" :type="inputType" placeholder=" " id="password" />
         <label class="cursor-text" for="password">Password</label>
         <div
           @click="togglePassword"
@@ -110,7 +140,7 @@ export default defineComponent({
         <i
           class="i-material-symbols-password text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input :type="inputType" placeholder=" " id="repassword" />
+        <input v-model="auth.repassword" :type="inputType" placeholder=" " id="repassword" />
         <label class="cursor-text" for="repassword">Re-enter Password</label>
         <div
           @click="togglePassword"
@@ -119,7 +149,7 @@ export default defineComponent({
           <i class="h-24px w-24px i-line-md-watch-loop text-#00000090" />
         </div>
       </div>
-      <router-link to="/forgot-password"
+      <router-link class="max-w-110px" to="/forgot-password"
         ><p class="text-#9e9e9e80 text-13px cursor-pointer underline">Şifremi Unuttum</p></router-link
       >
       <div class="gap-16px w-100% flex items-center justify-end">
