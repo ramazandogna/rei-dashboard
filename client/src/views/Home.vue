@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import LayoutAuthentication from '../layouts/LayoutAuthentication.vue'
 import SectionMain from '../components/SectionMain.vue'
 import SectionTitle from '../components/SectionTitle.vue'
@@ -10,10 +10,37 @@ import Charts from '../components/charts/Chart.vue'
 import Users from '../components/tables/UserTable.vue'
 import Introduce from '../components/Introduce.vue'
 import Bar from '../components/Bar.vue'
+import { UserResponse } from '../types/types'
 
 export default defineComponent({
   setup() {
-    return {}
+    let user = reactive<UserResponse>({
+      id: 0,
+      name: '',
+      surname: '',
+      username: '',
+      email: '',
+      userRole: '',
+      company: '',
+      iat: 0
+    })
+    const date = ref<Date>()
+
+    function readLocalStorage() {
+      const userDataString = localStorage.getItem('userData')
+      if (userDataString) {
+        Object.assign(user, JSON.parse(userDataString))
+        if (user.iat) {
+          date.value = new Date(user.iat * 1000)
+        }
+      }
+    }
+
+    onMounted(() => {
+      readLocalStorage()
+    })
+
+    return { user, date }
   },
   components: {
     LayoutAuthentication,

@@ -1,12 +1,18 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-
+import axios from 'axios'
 import Button from '../../components/Button.vue'
-
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
+import { useRouter } from 'vue-router'
 type InputType = 'password' | 'text'
 
 export default defineComponent({
   setup() {
+    //helpers
+    const toast = useToast()
+    const router = useRouter()
+    //refs
     const inputType = ref<InputType>('password')
 
     const togglePassword = () => {
@@ -14,16 +20,29 @@ export default defineComponent({
     }
 
     const auth = reactive({
-      email: '',
+      usernameOrEmail: '',
       password: ''
     })
 
-    const handleSubmit = () => {
-      if (auth.email !== '' || auth.password !== '') {
-        console.log('auth: ', auth)
-        auth.email = ''
-        auth.password = ''
-        console.log('auth: ', auth)
+    const handleSubmit = async () => {
+      const { usernameOrEmail, password } = auth
+      try {
+        const response = await axios.post('http://localhost:8000/auth/login', {
+          usernameOrEmail,
+          password
+        })
+        const data = response.data
+        if (data.error) {
+          toast.error(data.error)
+        } else {
+          toast.success('Login success')
+          setTimeout(() => {
+            router.push('/')
+          }, 1000)
+        }
+        console.log(response)
+      } catch (error) {
+        console.error(error)
       }
     }
 
@@ -57,15 +76,15 @@ export default defineComponent({
         <i
           class="i-material-symbols-person-raised-hand-rounded text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input type="text" placeholder=" " id="username" />
-        <label class="cursor-text" for="username">Username</label>
+        <input v-model="auth.usernameOrEmail" type="text" placeholder=" " id="usernameOrEmail" />
+        <label class="cursor-text" for="usernameOrEmail">Username or Email</label>
       </div>
 
       <div class="input">
         <i
           class="i-material-symbols-password text-#9e9e9e z-1 h-24px w-24px left-14px absolute flex h-full items-center"
         />
-        <input :type="inputType" placeholder=" " id="password" />
+        <input v-model="auth.password" :type="inputType" placeholder=" " id="password" />
         <label class="cursor-text" for="password">Password</label>
         <div
           @click="togglePassword"

@@ -12,6 +12,7 @@ type InputType = 'password' | 'text'
 
 export default defineComponent({
   setup() {
+    //helpers
     const router = useRouter()
     const toast = useToast()
     //refs
@@ -33,7 +34,7 @@ export default defineComponent({
 
     const handleSubmit = async () => {
       if (auth.password !== auth.repassword) {
-        alert('Passwords do not match')
+        toast.warning('Passwords do not match')
       } else {
         const { name, surname, username, email, company, password } = auth
         try {
@@ -53,7 +54,7 @@ export default defineComponent({
             toast.success('Register success, your are redirecting to login page.')
             setTimeout(() => {
               router.push('/login')
-            }, 2000)
+            }, 1000)
           }
         } catch (error) {
           console.error(error)
