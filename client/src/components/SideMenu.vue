@@ -2,18 +2,20 @@
 import { defineComponent, toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 import SideMenuItem from './SideMenuItem.vue'
-import { sideMenuItems } from '../data/index'
+import useData, { sideMenuItems } from '../data/index'
 import useSideMenuShow from '../hooks/sideMenu'
 
 export default defineComponent({
   setup() {
     const { toggleSideMenu, isSideMenuOpen } = useSideMenuShow()
+    const { handleLogout } = useData()
     const { value } = toRefs(isSideMenuOpen)
 
     return {
       sideMenuItems,
       toggleSideMenu,
-      isSideMenuOpen: value
+      isSideMenuOpen: value,
+      handleLogout
     }
   },
   components: { RouterLink, SideMenuItem }
@@ -48,7 +50,7 @@ export default defineComponent({
             />
           </ul>
         </div>
-        <div class="gradient-background flex w-full cursor-pointer items-center">
+        <div @click="handleLogout" class="gradient-background flex w-full cursor-pointer items-center">
           <RouterLink class="text-text flex cursor-pointer py-3" to="/login">
             <div class="inline-flex h-6 w-16 flex-none items-center justify-center">
               <div class="i-line-md-log-out w-18px h-18px"></div>

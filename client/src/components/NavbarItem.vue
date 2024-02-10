@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { RouteLocationRaw } from 'vue-router'
+import useData from '../data'
 
 interface SubItem {
   title?: string
@@ -23,14 +24,12 @@ export default defineComponent({
   setup() {
     const show = ref(false)
 
+    const { handleLogout } = useData()
     const toggleShow = () => {
       show.value = !show.value
     }
-    const handleLogOut = () => {
-      console.log('logout')
-    }
 
-    return { toggleShow, show, handleLogOut }
+    return { toggleShow, show, handleLogout }
   }
 })
 </script>
@@ -59,7 +58,7 @@ export default defineComponent({
       </router-link>
     </ul>
   </li>
-  <router-link v-else-if="logout === 1" @click="handleLogOut" :to="to || ''">
+  <router-link v-else-if="logout === 1" @click="handleLogout" :to="to || ''">
     <li v-if="title" :class="color" class="rounded-2xl px-3 py-2">{{ title }}</li>
     <div
       class="w-32px h-32px bgSlate flex items-center justify-center rounded-2xl shadow-sm transition-all"

@@ -138,8 +138,28 @@ const login = async (req, res) => {
   }
 }
 
+//logout endpoint
+const logout = (req, res) => {
+  res.clearCookie('token').json({ message: 'Logout success' })
+}
+
+//user endpoint
+const user = (req, res) => {
+  const { token } = req.cookies
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+      if (err) throw err
+      res.json(user)
+    })
+  } else {
+    res.json(null)
+  }
+}
+
 module.exports = {
   test,
   register,
-  login
+  login,
+  logout,
+  user
 }
