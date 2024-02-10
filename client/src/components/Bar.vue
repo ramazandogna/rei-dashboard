@@ -77,7 +77,7 @@ export default defineComponent({
       <div
         @click="toggleBarClose"
         v-if="barClose"
-        class="w-32px h-32px bg-bg/30 active:bg-bg/50 hover:bg-bg/40 shadow-bg/20 md:mr-none mx-auto flex w-full cursor-pointer items-center justify-center rounded-full transition-all hover:shadow-lg"
+        class="w-32px h-32px bg-bg/30 active:bg-bg/50 hover:bg-bg/40 shadow-bg/20 md:mr-none mx-auto flex cursor-pointer items-center justify-center rounded-full transition-all hover:shadow-lg"
       >
         <div class="i-ic-baseline-cancel w-20px h-20px bg-bg" />
       </div>
