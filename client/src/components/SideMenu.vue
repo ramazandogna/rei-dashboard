@@ -2,13 +2,14 @@
 import { defineComponent, toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 import SideMenuItem from './SideMenuItem.vue'
-import useData, { sideMenuItems } from '../data/index'
+import { sideMenuItems } from '../data/index'
 import useSideMenuShow from '../hooks/sideMenu'
+import useLogout from '../hooks/logout'
 
 export default defineComponent({
   setup() {
     const { toggleSideMenu, isSideMenuOpen } = useSideMenuShow()
-    const { handleLogout } = useData()
+    const { handleLogout } = useLogout()
     const { value } = toRefs(isSideMenuOpen)
 
     return {

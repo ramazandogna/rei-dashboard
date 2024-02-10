@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { RouteLocationRaw } from 'vue-router'
-import useData from '../data'
+import useLogout from '../hooks/logout'
 
 interface SubItem {
   title?: string
@@ -24,7 +24,7 @@ export default defineComponent({
   setup() {
     const show = ref(false)
 
-    const { handleLogout } = useData()
+    const { handleLogout } = useLogout()
     const toggleShow = () => {
       show.value = !show.value
     }

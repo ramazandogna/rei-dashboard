@@ -38,7 +38,7 @@ export default defineComponent({
           toast.success('Login success')
           setTimeout(() => {
             router.push('/')
-          }, 2000)
+          }, 1000)
         }
         console.log(response)
       } catch (error) {

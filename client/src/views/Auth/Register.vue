@@ -54,7 +54,7 @@ export default defineComponent({
             toast.success('Register success, your are redirecting to login page.')
             setTimeout(() => {
               router.push('/login')
-            }, 2000)
+            }, 1000)
           }
         } catch (error) {
           console.error(error)

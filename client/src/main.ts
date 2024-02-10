@@ -7,7 +7,7 @@ import '@unocss/reset/eric-meyer.css'
 import router from './router'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = 'http://localhost:8000/'
 axios.defaults.withCredentials = true
 
 const app = createApp(App)
