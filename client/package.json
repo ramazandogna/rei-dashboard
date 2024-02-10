@@ -15,7 +15,8 @@
     "chart.js": "^4.4.1",
     "vue": "^3.3.11",
     "vue-chartjs": "^5.3.0",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue-toast-notification": "^3.1.2"
   },
   "devDependencies": {
     "@unocss/preset-icons": "^0.58.4",
